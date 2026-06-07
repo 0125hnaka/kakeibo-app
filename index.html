@@ -4,6 +4,29 @@
 
     <form>
 
+        <h2>登録種別</h2>
+
+        <label>
+            <input
+                type="radio"
+                name="transactionType"
+                value="expense"
+                checked
+            >
+            支出
+        </label>
+
+        <label>
+            <input
+            type="radio"
+            name="transactionType"
+            value="income"
+            >
+            収入
+        </label>
+
+        <br><br>
+
         <div>
             <label for="amount">金額</label>
             <input
@@ -28,10 +51,6 @@
         <div>
             <label for="category">カテゴリ</label>
             <select id="category">
-                <option>食費</option>
-                <option>日用品</option>
-                <option>交通費</option>
-                <option>趣味</option>
             </select>
         </div>
 
@@ -57,12 +76,11 @@
 
     </form>
 
-    <script src="js/app.js"></script>
-
     <hr>
 
     <h2>登録済み支出</h2>
 
     <div id ="expenseList"></div>
 
+    <script src="js/app.js"></script>
 </body>

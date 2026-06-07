@@ -29,6 +29,56 @@ function saveExpenses(expenses) {
     );
 }
 
+//カテゴリ追加関数
+function getCategories() {
+
+    const data =
+        localStorage.getItem("categories");
+
+    if (data === null) {
+
+        const defaultCategories = [
+            "食費",
+            "日用品",
+            "交通費",
+            "趣味"
+        ];
+
+        localStorage.setItem(
+            "categories",
+            JSON.stringify(defaultCategories)
+        );
+
+        return defaultCategories;
+    }
+
+    return JSON.parse(data);
+}
+
+//カテゴリ表示関数
+function renderCategories() {
+
+    const categorySelect =
+        document.getElementById("category");
+
+    categorySelect.innerHTML = "";
+
+    const categories =
+        getCategories();
+
+    categories.forEach(function(category) {
+
+        const option =
+            document.createElement("option");
+
+        option.value = category;
+        option.textContent = category;
+
+        categorySelect.appendChild(option);
+
+    });
+}
+
 function renderExpenses() {
 
     const expenses = getExpenses();
@@ -44,6 +94,7 @@ function renderExpenses() {
             document.createElement("div");
 
         item.textContent =
+            `[${expense.type}] ` +
             `${expense.date} | ` +
             `${expense.category} | ` +
             `${expense.amount}円 | ` +
@@ -54,12 +105,6 @@ function renderExpenses() {
     });
 
 }
-
-//保存後フォームを初期化
-document.getElementById("amount").value = "";
-document.getElementById("category").selectedIndex = 0;
-document.getElementById("payment").selectedIndex = 0;
-
 
 //保存ボタンの設定
 const saveButton =
@@ -81,7 +126,13 @@ saveButton.addEventListener(
         const payment =
             document.getElementById("payment").value;
 
+        const transactionType =
+            document.querySelector(
+            'input[name="transactionType"]:checked'
+            ).value;
+
         const expense = {
+            type: transactionType,
             amount: Number(amount),
             date: date,
             category: category,
@@ -91,8 +142,12 @@ saveButton.addEventListener(
         expenses.push(expense);
         saveExpenses(expenses);
         renderExpenses();
+        document.getElementById("amount").value = "";
+    document.getElementById("category").selectedIndex = 0;
+    document.getElementById("payment").selectedIndex = 0;
         console.log(expenses);
     }
 );
 
+renderCategories();
 renderExpenses();
