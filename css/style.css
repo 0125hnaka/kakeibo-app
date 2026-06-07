@@ -1,0 +1,11 @@
+body {
+    font-family: sans-serif;
+    margin: 30px;
+}
+
+input,
+select,
+button {
+    padding: 8px;
+    margin-top: 5px;
+}
