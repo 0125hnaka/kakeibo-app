@@ -38,10 +38,26 @@ function getCategories() {
     if (data === null) {
 
         const defaultCategories = [
-            "食費",
-            "日用品",
-            "交通費",
-            "趣味"
+            {
+                name: "食費",
+                type: "expense"
+            },
+            {
+                name: "日用品",
+                type: "expense"
+            },
+            {
+                name: "交通費",
+                type: "expense"
+            },
+            {
+                name: "趣味",
+                type: "expense"
+            },
+            {
+                name: "給与",
+                type: "income"
+            }
         ];
 
         localStorage.setItem(
@@ -55,6 +71,15 @@ function getCategories() {
     return JSON.parse(data);
 }
 
+function saveCategories(categories) {
+
+    localStorage.setItem(
+        "categories",
+        JSON.stringify(categories)
+    );
+
+}
+
 //カテゴリ表示関数
 function renderCategories() {
 
@@ -63,20 +88,33 @@ function renderCategories() {
 
     categorySelect.innerHTML = "";
 
+    const transactionType =
+        document.querySelector(
+            'input[name="transactionType"]:checked'
+        ).value;
+
     const categories =
         getCategories();
 
     categories.forEach(function(category) {
 
+        if (category.type !== transactionType) {
+            return;
+        }
+
         const option =
             document.createElement("option");
 
-        option.value = category;
-        option.textContent = category;
+        option.value =
+            category.name;
+
+        option.textContent =
+            category.name;
 
         categorySelect.appendChild(option);
 
     });
+
 }
 
 function renderExpenses() {
@@ -143,11 +181,74 @@ saveButton.addEventListener(
         saveExpenses(expenses);
         renderExpenses();
         document.getElementById("amount").value = "";
-    document.getElementById("category").selectedIndex = 0;
-    document.getElementById("payment").selectedIndex = 0;
+        document.getElementById("category").selectedIndex = 0;
+        document.getElementById("payment").selectedIndex = 0;
         console.log(expenses);
     }
 );
+
+const addCategoryButton =
+    document.getElementById(
+        "addCategoryButton"
+    );
+
+addCategoryButton.addEventListener(
+    "click",
+    function() {
+
+        const newCategory =
+            document.getElementById(
+                "newCategory"
+            ).value.trim();
+
+        if (newCategory === "") {
+            return;
+        }
+
+        const categories =
+            getCategories();
+
+        const categoryType =
+            document.querySelector(
+                'input[name="categoryType"]:checked'
+            ).value;
+
+        categories.push({
+            name: newCategory,
+            type: categoryType
+        });
+
+        saveCategories(categories);
+
+        renderCategories();
+
+        document.getElementById(
+            "newCategory"
+        ).value = "";
+
+    }
+);
+
+const transactionTypeRadios =
+    document.querySelectorAll(
+        'input[name="transactionType"]'
+    );
+
+transactionTypeRadios.forEach(
+    function(radio) {
+
+        radio.addEventListener(
+            "change",
+            function() {
+
+                renderCategories();
+
+            }
+        );
+
+    }
+);
+
 
 renderCategories();
 renderExpenses();
