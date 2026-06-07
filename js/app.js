@@ -26,10 +26,14 @@ saveButton.addEventListener(
         const payment =
             document.getElementById("payment").value;
 
-        console.log("金額:", amount);
-        console.log("日付:", date);
-        console.log("カテゴリ:", category);
-        console.log("支払方法:", payment);
+        const expense = {
+            amount: Number(amount),
+            date: date,
+            category: category,
+            payment: payment
+        };
+
+        console.log(expense);
 
     }
 );
