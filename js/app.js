@@ -29,6 +29,32 @@ function saveExpenses(expenses) {
     );
 }
 
+function renderExpenses() {
+
+    const expenses = getExpenses();
+
+    const expenseList =
+        document.getElementById("expenseList");
+
+    expenseList.innerHTML = "";
+
+    expenses.forEach(function(expense) {
+
+        const item =
+            document.createElement("div");
+
+        item.textContent =
+            `${expense.date} | ` +
+            `${expense.category} | ` +
+            `${expense.amount}円 | ` +
+            `${expense.payment}`;
+
+        expenseList.appendChild(item);
+
+    });
+
+}
+
 //保存後フォームを初期化
 document.getElementById("amount").value = "";
 document.getElementById("category").selectedIndex = 0;
@@ -64,6 +90,9 @@ saveButton.addEventListener(
         const expenses = getExpenses();
         expenses.push(expense);
         saveExpenses(expenses);
+        renderExpenses();
         console.log(expenses);
     }
 );
+
+renderExpenses();
