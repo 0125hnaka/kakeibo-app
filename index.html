@@ -112,6 +112,44 @@
             placeholder="新しい支払方法"
         />
 
+        <br><br>
+
+        <label>
+            <input
+                type="radio"
+                name="paymentType"
+                value="cash"
+                checked
+            >
+            現金
+        </label>
+
+        <label>
+            <input
+                type="radio"
+                name="paymentType"
+                value="emoney"
+            >
+            電子マネー
+        </label>
+
+        <label>
+            <input
+                type="radio"
+                name="paymentType"
+                value="credit"
+            >
+            クレジットカード
+        </label>
+
+        <br><br>
+
+        <input
+            type="number"
+            id="paymentDay"
+            placeholder="支払日（カードのみ）"
+        />
+
         <button
             type="button"
             id="addPaymentButton"
@@ -134,13 +172,71 @@
 
     <h2>登録済み支出</h2>
 
+    <h3>表示月</h3>
+
+    <select id="expenseMonth">
+    </select>
+
     <div id ="expenseList"></div>
 
     <hr>
+
+    <h2>現在口座残高</h2>
+
+    <div id="balanceDisplay">
+        0円
+    </div>
+
+    <br>
+
+    <input
+        type="number"
+        id="balanceInput"
+        placeholder="残高入力"
+    />
+
+    <button
+        type="button"
+        id="saveBalanceButton"
+    >
+        残高保存
+    </button>
+
+    <hr>
+
+    <h3>集計対象月</h3>
+
+    <select id="summaryMonth">
+    </select>
 
     <h2>支払方法別集計</h2>
 
     <div id="paymentSummary"></div>
 
+    <hr>
+
+    <h2>クレジットカード管理</h2>
+
+    <div id="creditCardList"></div>
+
+    <hr>
+
+    <h2>開発用</h2>
+
+    <button
+        type="button"
+        id="resetButton"
+    >
+        全データ削除
+    </button>
+
+    <script src="js/storage.js"></script>
+    <script src="js/category.js"></script>
+    <script src="js/payment.js"></script>
+    <script src="js/expense.js"></script>
+    <script src="js/summary.js"></script>
+    <script src="js/balance.js"></script>
+    <script src="js/billing.js"></script>
+    <script src="js/reset.js"></script>
     <script src="js/app.js"></script>
 </body>
