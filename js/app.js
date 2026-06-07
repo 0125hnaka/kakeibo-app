@@ -71,6 +71,64 @@ function getCategories() {
     return JSON.parse(data);
 }
 
+function getPayments() {
+
+    const data =
+        localStorage.getItem("payments");
+
+    if (data === null) {
+
+        const defaultPayments = [
+            "現金",
+            "PayPay",
+            "楽天カード"
+        ];
+
+        localStorage.setItem(
+            "payments",
+            JSON.stringify(defaultPayments)
+        );
+
+        return defaultPayments;
+    }
+
+    return JSON.parse(data);
+}
+
+function savePayments(payments) {
+
+    localStorage.setItem(
+        "payments",
+        JSON.stringify(payments)
+    );
+
+}
+
+function renderPayments() {
+
+    const paymentSelect =
+        document.getElementById("payment");
+
+    paymentSelect.innerHTML = "";
+
+    const payments =
+        getPayments();
+
+    payments.forEach(function(payment) {
+
+        const option =
+            document.createElement("option");
+
+        option.value = payment;
+
+        option.textContent = payment;
+
+        paymentSelect.appendChild(option);
+
+    });
+
+}
+
 function saveCategories(categories) {
 
     localStorage.setItem(
@@ -213,6 +271,25 @@ addCategoryButton.addEventListener(
                 'input[name="categoryType"]:checked'
             ).value;
 
+        const exists = categories.some(
+            function(category) {
+
+                return (
+                    category.name === newCategory &&
+                    category.type === categoryType
+                );
+
+            }
+        );
+
+        if (exists) {
+            alert(
+                "既に存在するカテゴリです"
+            );
+
+            return;
+        }
+
         categories.push({
             name: newCategory,
             type: categoryType
@@ -249,6 +326,107 @@ transactionTypeRadios.forEach(
     }
 );
 
+const addPaymentButton =
+    document.getElementById(
+        "addPaymentButton"
+    );
+
+addPaymentButton.addEventListener(
+    "click",
+    function() {
+
+        const newPayment =
+            document.getElementById(
+                "newPayment"
+            ).value.trim();
+
+        if (newPayment === "") {
+            return;
+        }
+
+        const payments =
+            getPayments();
+
+        if (
+            payments.includes(
+                newPayment
+            )
+        ) {
+
+            alert(
+                "既に存在します"
+            );
+
+            return;
+        }
+
+        payments.push(
+            newPayment
+        );
+
+        savePayments(
+            payments
+        );
+
+        renderPayments();
+
+        document.getElementById(
+            "newPayment"
+        ).value = "";
+
+    }
+);
+
+function renderPaymentSummary() {
+
+    const expenses =
+        getExpenses();
+
+    const summary = {};
+
+    expenses.forEach(function(expense) {
+
+        const payment =
+            expense.payment;
+
+        if (!summary[payment]) {
+
+            summary[payment] = 0;
+
+        }
+
+        summary[payment] +=
+            expense.amount;
+
+    });
+
+    const summaryDiv =
+        document.getElementById(
+            "paymentSummary"
+        );
+
+    summaryDiv.innerHTML = "";
+
+    for (const payment in summary) {
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+        item.textContent =
+            `${payment} : ${summary[payment]}円`;
+
+        summaryDiv.appendChild(
+            item
+        );
+
+    }
+
+}
+
 
 renderCategories();
+renderPayments();
 renderExpenses();
+renderPaymentSummary();

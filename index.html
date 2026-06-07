@@ -104,6 +104,21 @@
             </select>
         </div>
 
+        <h3>支払方法管理</h3>
+
+        <input
+            type="text"
+            id="newPayment"
+            placeholder="新しい支払方法"
+        />
+
+        <button
+            type="button"
+            id="addPaymentButton"
+        >
+            支払方法追加
+        </button>
+
         <br>
 
         <button 
@@ -120,6 +135,12 @@
     <h2>登録済み支出</h2>
 
     <div id ="expenseList"></div>
+
+    <hr>
+
+    <h2>支払方法別集計</h2>
+
+    <div id="paymentSummary"></div>
 
     <script src="js/app.js"></script>
 </body>
