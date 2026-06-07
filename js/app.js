@@ -7,6 +7,35 @@ const today = new Date()
 document.getElementById("date").value =
     today;
 
+//DBへデータ取得関数
+function getExpenses() {
+
+    const data =
+        localStorage.getItem("expenses");
+
+    if (data === null) {
+        return [];
+    }
+
+    return JSON.parse(data);
+}
+
+//DBへの保存関数
+function saveExpenses(expenses) {
+
+    localStorage.setItem(
+        "expenses",
+        JSON.stringify(expenses)
+    );
+}
+
+//保存後フォームを初期化
+document.getElementById("amount").value = "";
+document.getElementById("category").selectedIndex = 0;
+document.getElementById("payment").selectedIndex = 0;
+
+
+//保存ボタンの設定
 const saveButton =
     document.getElementById("saveButton");
 
@@ -32,8 +61,9 @@ saveButton.addEventListener(
             category: category,
             payment: payment
         };
-
-        console.log(expense);
-
+        const expenses = getExpenses();
+        expenses.push(expense);
+        saveExpenses(expenses);
+        console.log(expenses);
     }
 );
