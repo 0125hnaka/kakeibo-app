@@ -16,3 +16,6 @@ renderExpenses();
 renderMonthSelector();
 renderPaymentSummary();
 renderCreditCardList();
+renderCategoryChart();
+updateCalendarTitle();
+renderCalendar();

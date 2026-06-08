@@ -125,6 +125,7 @@ summaryMonth.addEventListener(
 
         renderPaymentSummary();
         renderCreditCardList();
+        renderCategoryChart();
 
     }
 );

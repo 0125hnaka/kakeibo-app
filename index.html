@@ -1,38 +1,191 @@
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        家計簿アプリ
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
 <body>
 
-    <h1>家計簿アプリ</h1>
+    <!-- 入力ページ -->
+    <div id="inputPage">
 
-    <form>
+        <h1>家計簿アプリ</h1>
 
-        <h2>登録種別</h2>
+        <div class="balance-card">
 
-        <label>
-            <input
-                type="radio"
-                name="transactionType"
-                value="expense"
-                checked
+            <div class="balance-title">
+                現在口座残高
+            </div>
+
+            <div
+                id="balanceDisplay"
+                class="balance-amount"
             >
-            支出
-        </label>
+                0円
+            </div>
 
-        <label>
+        </div>
+
+        <div class="input-card">
+
+            <h2>収支登録</h2>
+
+            <label>
+                <input
+                    type="radio"
+                    name="transactionType"
+                    value="expense"
+                    checked
+                >
+                支出
+            </label>
+
+            <label>
+                <input
+                    type="radio"
+                    name="transactionType"
+                    value="income"
+                >
+                収入
+            </label>
+
+            <br><br>
+
             <input
-            type="radio"
-            name="transactionType"
-            value="income"
+                type="number"
+                id="amount"
+                placeholder="金額"
             >
-            収入
-        </label>
 
-        <br>
+            <br><br>
 
-        <h3>カテゴリ管理</h3>
+            <input
+                type="date"
+                id="date"
+            >
+
+            <br><br>
+
+            <select id="category">
+            </select>
+
+            <br><br>
+
+            <select id="payment">
+            </select>
+
+            <br><br>
+
+            <button
+                type="button"
+                id="saveButton"
+            >
+                保存
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- 履歴ページ -->
+    <div
+        id="historyPage"
+        style="display:none;"
+    >
+
+        <h1>履歴</h1>
+
+        <div id="calendarHeader">
+
+            <button
+                type="button"
+                id="prevMonth"
+            >
+                ◀
+            </button>
+
+            <span id="calendarTitle">
+                2026-06
+            </span>
+
+            <button
+                type="button"
+                id="nextMonth"
+            >
+                ▶
+            </button>
+
+        </div>
+
+        <div id="calendarContainer">
+        </div>
+
+    <h3>表示月</h3>
+
+    <select id="expenseMonth">
+    </select>
+
+    <br><br>
+
+    <div id="expenseList">
+    </div>
+
+</div>
+
+    <!-- 分析ページ -->
+    <div
+        id="analysisPage"
+        style="display:none;"
+    >
+
+        <h1>分析</h1>
+
+        <h3>集計対象月</h3>
+
+        <select id="summaryMonth">
+        </select>
+
+        <canvas id="categoryChart"></canvas>
+
+        <h3>支払方法別集計</h3>
+
+        <div id="paymentSummary">
+        </div>
+
+        <hr>
+
+        <h3>クレジットカード管理</h3>
+
+        <div id="creditCardList">
+        </div>
+
+    </div>
+
+    <!-- 設定ページ -->
+    <div
+        id="settingsPage"
+        style="display:none;"
+    >
+
+        <h1>設定</h1>
+
+        <h2>カテゴリ管理</h2>
+
         <input
             type="text"
             id="newCategory"
             placeholder="新しいカテゴリ"
-        />
+        >
 
         <br><br>
 
@@ -43,7 +196,7 @@
                 value="expense"
                 checked
             >
-            支出カテゴリ
+            支出
         </label>
 
         <label>
@@ -52,7 +205,7 @@
                 name="categoryType"
                 value="income"
             >
-            収入カテゴリ
+            収入
         </label>
 
         <br><br>
@@ -64,53 +217,15 @@
             カテゴリ追加
         </button>
 
-        <br><br>
+        <hr>
 
-        <div>
-            <label for="amount">金額</label>
-            <input
-                type="number"
-                id="amount"
-                placeholder="金額を入力"
-            >
-        </div>
-
-        <br>
-
-        <div>
-            <label for="date">日付</label>
-            <input
-                type="date"
-                id="date"
-            >
-        </div>
-
-        <br>
-
-        <div>
-            <label for="category">カテゴリ</label>
-            <select id="category">
-            </select>
-        </div>
-
-        <br>
-
-        <div>
-            <label for="payment">支払方法</label>
-            <select id="payment">
-                <option>現金</option>
-                <option>PayPay</option>
-                <option>楽天カード</option>
-            </select>
-        </div>
-
-        <h3>支払方法管理</h3>
+        <h2>支払方法管理</h2>
 
         <input
             type="text"
             id="newPayment"
             placeholder="新しい支払方法"
-        />
+        >
 
         <br><br>
 
@@ -147,8 +262,10 @@
         <input
             type="number"
             id="paymentDay"
-            placeholder="支払日（カードのみ）"
-        />
+            placeholder="支払日"
+        >
+
+        <br><br>
 
         <button
             type="button"
@@ -157,86 +274,79 @@
             支払方法追加
         </button>
 
-        <br>
+        <hr>
 
-        <button 
-            type="button"
-            id="saveButton"
+        <h2>口座残高設定</h2>
+
+        <input
+            type="number"
+            id="balanceInput"
+            placeholder="残高入力"
         >
-            保存
+
+        <button
+            type="button"
+            id="saveBalanceButton"
+        >
+            残高保存
         </button>
 
-    </form>
+        <hr>
 
-    <hr>
+        <button
+            type="button"
+            id="resetButton"
+        >
+            全データ削除
+        </button>
 
-    <h2>登録済み支出</h2>
-
-    <h3>表示月</h3>
-
-    <select id="expenseMonth">
-    </select>
-
-    <div id ="expenseList"></div>
-
-    <hr>
-
-    <h2>現在口座残高</h2>
-
-    <div id="balanceDisplay">
-        0円
     </div>
 
-    <br>
+    <!-- 下部ナビ -->
+    <nav id="bottomNav">
 
-    <input
-        type="number"
-        id="balanceInput"
-        placeholder="残高入力"
-    />
+        <button
+            type="button"
+            id="inputTab"
+        >
+            入力
+        </button>
 
-    <button
-        type="button"
-        id="saveBalanceButton"
-    >
-        残高保存
-    </button>
+        <button
+            type="button"
+            id="historyTab"
+        >
+            履歴
+        </button>
 
-    <hr>
+        <button
+            type="button"
+            id="analysisTab"
+        >
+            分析
+        </button>
 
-    <h3>集計対象月</h3>
+        <button
+            type="button"
+            id="settingsTab"
+        >
+            設定
+        </button>
 
-    <select id="summaryMonth">
-    </select>
+    </nav>
 
-    <h2>支払方法別集計</h2>
-
-    <div id="paymentSummary"></div>
-
-    <hr>
-
-    <h2>クレジットカード管理</h2>
-
-    <div id="creditCardList"></div>
-
-    <hr>
-
-    <h2>開発用</h2>
-
-    <button
-        type="button"
-        id="resetButton"
-    >
-        全データ削除
-    </button>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/category.js"></script>
     <script src="js/payment.js"></script>
     <script src="js/expense.js"></script>
     <script src="js/summary.js"></script>
+    <script src="js/chart.js"></script>
     <script src="js/balance.js"></script>
     <script src="js/billing.js"></script>
     <script src="js/reset.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/calendar.js"></script>
+
 </body>

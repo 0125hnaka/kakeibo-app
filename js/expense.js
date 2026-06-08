@@ -12,26 +12,87 @@ function renderExpenses() {
         "expenseMonth"
     ).value;
 
-    expenses.forEach(function(expense) {
+    let lastDate = "";
+
+    expenses.sort(
+    function(a, b) {
+
+        return (
+            new Date(a.date) -
+            new Date(b.date)
+        );
+
+    }
+);
+
+    expenses.forEach(
+    function(expense) {
 
         if (
-            expense.date.substring(0, 7)
-            !== selectedMonth
+            expense.date.substring(
+                0,
+                7
+            ) !== selectedMonth
         ) {
 
             return;
 
         }
 
+        if (
+            expense.date !==
+            lastDate
+        ) {
+
+            const dateHeader =
+                document.createElement(
+                    "h3"
+                );
+
+            dateHeader.textContent =
+                expense.date;
+
+            expenseList.appendChild(
+                dateHeader
+            );
+
+            lastDate =
+                expense.date;
+
+        }
+
         const item =
             document.createElement("div");
 
+        item.className =
+            "expense-card";
+
         item.innerHTML =
-            `[${expense.type}] ` +
-            `${expense.date} | ` +
-            `${expense.category} | ` +
-            `${expense.amount}円 | ` +
-            `${expense.payment} `;
+            `
+            <div class="expense-top">
+
+                <span>
+                    ${expense.category}
+                </span>
+
+                <span>
+                    ${expense.amount.toLocaleString()}円
+                </span>
+
+            </div>
+
+            <div class="expense-info">
+
+                <span>
+                    ${expense.date}
+                </span>
+
+                <span>
+                    ${expense.payment}
+                </span>
+
+            </div>
+            `;
 
         const deleteButton =
             document.createElement(
@@ -71,12 +132,24 @@ function renderExpenses() {
             }
         );
 
-        item.appendChild(
+        const buttonArea =
+            document.createElement(
+                "div"
+            );
+
+        buttonArea.className =
+            "expense-buttons";
+
+        buttonArea.appendChild(
             editButton
         );
 
-        item.appendChild(
+        buttonArea.appendChild(
             deleteButton
+        );
+
+        item.appendChild(
+            buttonArea
         );
 
         expenseList.appendChild(
