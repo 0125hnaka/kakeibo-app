@@ -70,6 +70,7 @@ document.getElementById(
         showPage(
             "analysisPage"
         );
+        renderSummaryCards();
 
     }
 );

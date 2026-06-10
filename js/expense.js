@@ -1,3 +1,6 @@
+let editingExpenseId =
+    null;
+
 function renderExpenses() {
 
     const expenses = getExpenses();
@@ -8,9 +11,17 @@ function renderExpenses() {
     expenseList.innerHTML = "";
 
     const selectedMonth =
-    document.getElementById(
-        "expenseMonth"
-    ).value;
+        currentMonth;
+
+    const selectedCategory =
+        document.getElementById(
+            "historyCategoryFilter"
+        ).value;
+
+    const selectedPayment =
+        document.getElementById(
+            "historyPaymentFilter"
+        ).value;
 
     let lastDate = "";
 
@@ -40,6 +51,26 @@ function renderExpenses() {
         }
 
         if (
+            selectedCategory &&
+            expense.category !==
+            selectedCategory
+        ) {
+
+            return;
+
+        }
+
+        if (
+            selectedPayment &&
+            expense.payment !==
+            selectedPayment
+        ) {
+
+            return;
+
+        }
+
+        if (
             expense.date !==
             lastDate
         ) {
@@ -48,6 +79,10 @@ function renderExpenses() {
                 document.createElement(
                     "h3"
                 );
+            
+            dateHeader.id =
+                "date-" +
+                expense.date;
 
             dateHeader.textContent =
                 expense.date;
@@ -69,19 +104,19 @@ function renderExpenses() {
 
         item.innerHTML =
             `
-            <div class="expense-top">
+            <div class="expense-row1">
 
-                <span>
+                <span class="expense-category">
                     ${expense.category}
                 </span>
 
-                <span>
+                <span class="expense-amount">
                     ${expense.amount.toLocaleString()}円
                 </span>
 
             </div>
 
-            <div class="expense-info">
+            <div class="expense-row2">
 
                 <span>
                     ${expense.date}
@@ -223,7 +258,6 @@ saveButton.addEventListener(
 
         saveExpenses(expenses);
 
-        renderExpenseMonthSelector();
         renderExpenses();
 
         renderMonthSelector();
@@ -268,7 +302,6 @@ function deleteExpense(
 
         saveExpenses(expenses);
 
-        renderExpenseMonthSelector();
         renderExpenses();
 
         renderMonthSelector();
@@ -277,77 +310,6 @@ function deleteExpense(
         recalculateBalance();
 
 }
-
-function renderExpenseMonthSelector() {
-
-    const expenses =
-        getExpenses();
-
-    const expenseMonth =
-        document.getElementById(
-            "expenseMonth"
-        );
-
-    expenseMonth.innerHTML = "";
-
-    const months = [];
-
-    expenses.forEach(
-        function(expense) {
-
-            const month =
-                expense.date.substring(
-                    0,
-                    7
-                );
-
-            if (
-                !months.includes(month)
-            ) {
-
-                months.push(month);
-
-            }
-
-        }
-    );
-
-    months.sort().reverse();
-
-    months.forEach(
-        function(month) {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value = month;
-
-            option.textContent = month;
-
-            expenseMonth.appendChild(
-                option
-            );
-
-        }
-    );
-
-}
-
-const expenseMonth =
-    document.getElementById(
-        "expenseMonth"
-    );
-
-expenseMonth.addEventListener(
-    "change",
-    function() {
-
-        renderExpenses();
-
-    }
-);
 
 function editExpense(
     expenseId
@@ -358,105 +320,394 @@ function editExpense(
 
     const expense =
         expenses.find(
-            function(item) {
-
-                return (
-                    item.id ===
-                    expenseId
-                );
-
-            }
+            item =>
+            item.id ===
+            expenseId
         );
 
     if (!expense) {
         return;
     }
 
-    const newAmount =
-        prompt(
-            "金額を入力",
-            expense.amount
-        );
-    if (
-        newAmount === null
-    ) {
-        return;
-    }
+    editingExpenseId =
+        expenseId;
 
-    const newDate =
-        prompt(
-            "日付を入力",
-            expense.date
-        );
+    document.getElementById(
+        "editAmount"
+    ).value =
+        expense.amount;
 
-    if (
-        newDate === null
-    ) {
-        return;
-    }
+    document.getElementById(
+        "editDate"
+    ).value =
+        expense.date;
 
-    const newCategory =
-        prompt(
-            "カテゴリを入力",
-            expense.category
+    const editCategory =
+        document.getElementById(
+            "editCategory"
         );
 
-    if (
-        newCategory === null
-    ) {
-        return;
-    }
+    editCategory.innerHTML =
+        "";
 
-    const newPayment =
-        prompt(
-            "支払方法を入力",
-            expense.payment
-        );
+    getCategories()
+    .forEach(
+        function(category) {
 
-    if (
-        newPayment === null
-    ) {
-        return;
-    }
+            if (
+                category.type ===
+                expense.type
+            ) {
 
-    const newType =
-        prompt(
-            "収支区分 (income / expense)",
-            expense.type
-        );
+                const option =
+                    document.createElement(
+                        "option"
+                    );
 
-    if (
-        newType === null
-    ) {
-        return;
-    }
+                option.value =
+                    category.name;
 
-    expense.amount =
-        Number(newAmount);
+                option.textContent =
+                    category.name;
 
-    expense.date =
-        newDate;
+                editCategory.appendChild(
+                    option
+                );
 
-    expense.category =
-        newCategory;
+            }
 
-    expense.payment =
-        newPayment;
-
-    expense.type =
-        newType;
-
-    saveExpenses(
-        expenses
+        }
     );
 
-    recalculateBalance();
+    const editPayment =
+        document.getElementById(
+            "editPayment"
+        );
 
-    renderExpenseMonthSelector();
-    renderExpenses();
+    editPayment.innerHTML =
+        "";
 
-    renderMonthSelector();
-    renderPaymentSummary();
-    renderCreditCardList();
+    getPayments()
+    .forEach(
+        function(payment) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                payment.name;
+
+            option.textContent =
+                payment.name;
+
+            editPayment.appendChild(
+                option
+            );
+
+        }
+    );
+
+    editPayment.value =
+        expense.payment;
+
+    editCategory.value =
+        expense.category;
+
+    document.getElementById(
+        "editType"
+    ).value =
+        expense.type;
+
+    document.getElementById(
+        "editModal"
+    ).style.display =
+        "flex";
 
 }
+
+document.getElementById(
+    "cancelEditButton"
+).addEventListener(
+    "click",
+    function() {
+
+        document.getElementById(
+            "editModal"
+        ).style.display =
+            "none";
+
+    }
+);
+
+document.getElementById(
+    "saveEditButton"
+).addEventListener(
+    "click",
+    function() {
+
+        const expenses =
+            getExpenses();
+
+        const expense =
+            expenses.find(
+                item =>
+                item.id ===
+                editingExpenseId
+            );
+
+        if (!expense) {
+            return;
+        }
+
+        expense.amount =
+            Number(
+                document.getElementById(
+                    "editAmount"
+                ).value
+            );
+
+        expense.date =
+            document.getElementById(
+                "editDate"
+            ).value;
+
+        expense.category =
+            document.getElementById(
+                "editCategory"
+            ).value;
+
+        expense.payment =
+            document.getElementById(
+                "editPayment"
+            ).value;
+
+        expense.type =
+            document.getElementById(
+                "editType"
+            ).value;
+
+        saveExpenses(
+            expenses
+        );
+
+        recalculateBalance();
+
+        renderExpenses();
+
+        renderMonthSelector();
+
+        renderPaymentSummary();
+
+        renderCreditCardList();
+
+        renderExpenseRanking();
+
+        renderIncomeRanking();
+
+        renderIncomeSummary();
+
+        renderExpensePaymentSummary();
+
+        renderCardUsage();
+
+        renderCardBilling();
+
+        renderAssetAnalysis();
+
+        updateCalendarTitle();
+
+        renderCalendar();
+
+        document.getElementById(
+            "editModal"
+        ).style.display =
+            "none";
+
+    }
+);
+
+document.getElementById(
+    "editType"
+).addEventListener(
+    "change",
+    function() {
+
+        const type =
+            this.value;
+
+        const categorySelect =
+            document.getElementById(
+                "editCategory"
+            );
+
+        categorySelect.innerHTML =
+            "";
+
+        getCategories()
+        .forEach(
+            function(category) {
+
+                if (
+                    category.type ===
+                    type
+                ) {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+                    option.value =
+                        category.name;
+
+                    option.textContent =
+                        category.name;
+
+                    categorySelect.appendChild(
+                        option
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+window.addEventListener(
+    "click",
+    function(event) {
+
+        const modal =
+            document.getElementById(
+                "editModal"
+            );
+
+        if (
+            event.target ===
+            modal
+        ) {
+
+            modal.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            document.getElementById(
+                "editModal"
+            ).style.display =
+                "none";
+
+        }
+
+    }
+);
+
+function renderHistoryFilters() {
+
+    const categoryFilter =
+        document.getElementById(
+            "historyCategoryFilter"
+        );
+
+    const paymentFilter =
+        document.getElementById(
+            "historyPaymentFilter"
+        );
+
+    categoryFilter.innerHTML =
+        `
+        <option value="">
+            全カテゴリ
+        </option>
+        `;
+
+    paymentFilter.innerHTML =
+        `
+        <option value="">
+            全支払方法
+        </option>
+        `;
+
+    getCategories()
+    .forEach(
+        function(category) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                category.name;
+
+            option.textContent =
+                category.name;
+
+            categoryFilter.appendChild(
+                option
+            );
+
+        }
+    );
+
+    getPayments()
+    .forEach(
+        function(payment) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                payment.name;
+
+            option.textContent =
+                payment.name;
+
+            paymentFilter.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+document.getElementById(
+    "historyCategoryFilter"
+).addEventListener(
+    "change",
+    function() {
+
+        renderExpenses();
+
+    }
+);
+
+document.getElementById(
+    "historyPaymentFilter"
+).addEventListener(
+    "change",
+    function() {
+
+        renderExpenses();
+
+    }
+);

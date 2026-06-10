@@ -38,7 +38,11 @@ function renderPaymentSummary() {
             "paymentSummary"
         );
 
-    summaryDiv.innerHTML = "";
+    if (!summaryDiv) {
+        return;
+    }
+
+summaryDiv.innerHTML = "";
 
     for (const payment in summary) {
 
@@ -48,7 +52,10 @@ function renderPaymentSummary() {
             );
 
         item.textContent =
-            `${payment} : ${summary[payment]}円`;
+            `${payment} : ${
+                summary[payment]
+                    .toLocaleString()
+            }円`;
 
         summaryDiv.appendChild(
             item
@@ -126,6 +133,13 @@ summaryMonth.addEventListener(
         renderPaymentSummary();
         renderCreditCardList();
         renderCategoryChart();
+        renderSummaryCards();
+        renderExpenseAnalysis();
+        renderExpensePaymentSummary();
+        renderIncomeRanking();
+        renderIncomeSummary();
+        renderIncomeChart();
+        renderAssetAnalysis();
 
     }
 );
@@ -168,10 +182,16 @@ function renderCreditCardList() {
                     "div"
                 );
 
+            cardDiv.className =
+                "credit-card-box";
+
             const title =
                 document.createElement(
                     "h3"
                 );
+
+            title.className =
+                "credit-card-title";
 
             title.textContent =
                 `${card.name}（支払日:${card.paymentDay}日）`;
@@ -259,10 +279,24 @@ function renderCreditCardList() {
                             "div"
                         );
 
-                    item.textContent =
-                        `${month} : ` +
-                        `${total.toLocaleString()}円 ` +
-                        `(${paid ? "請求済" : "未請求"})`;
+                    item.innerHTML =
+                        `
+                        <div>
+                            ${month}
+                        </div>
+
+                        <div>
+                            ${total.toLocaleString()}円
+                        </div>
+
+                        <div>
+                            ${
+                            paid
+                            ? "請求済"
+                            : "未請求"
+                            }
+                        </div>
+                        `;
 
                     cardDiv.appendChild(
                         item

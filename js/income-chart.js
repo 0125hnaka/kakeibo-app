@@ -1,21 +1,26 @@
-function renderCategoryChart() {
+function renderIncomeChart() {
 
     const expenses =
         getExpenses();
 
     const selectedMonth =
-        expenseAnalysisMonth;
+        document.getElementById(
+            "summaryMonth"
+        ).value;
 
-    const summary = {};
+    const categoryTotals =
+        {};
 
     expenses.forEach(
         function(expense) {
 
             if (
                 expense.type !==
-                "expense"
+                "income"
             ) {
+
                 return;
+
             }
 
             if (
@@ -24,73 +29,74 @@ function renderCategoryChart() {
                     7
                 ) !== selectedMonth
             ) {
+
                 return;
+
             }
 
             if (
-                !summary[
+                !categoryTotals[
                     expense.category
                 ]
             ) {
 
-                summary[
+                categoryTotals[
                     expense.category
                 ] = 0;
 
             }
 
-            summary[
+            categoryTotals[
                 expense.category
             ] += expense.amount;
 
         }
     );
 
-    const labels =
-        Object.keys(summary);
-
-    const values =
-        Object.values(summary);
-
     const canvas =
         document.getElementById(
-            "expenseCategoryChart"
+            "incomeCategoryChart"
         );
-
-    if (
-        window.categoryChart &&
-        typeof window.categoryChart.destroy
-        === "function"
-    ) {
-
-        window.categoryChart.destroy();
-
-    }
-
-    console.log(
-        window.categoryChart
-    );
 
     if (!canvas) {
         return;
     }
 
-    window.categoryChart =
+    const ctx =
+        canvas.getContext("2d");
+
+    if (
+        window.incomeChart
+    ) {
+
+        window.incomeChart.destroy();
+
+    }
+
+    window.incomeChart =
         new Chart(
-            canvas,
+            ctx,
             {
                 type: "pie",
 
                 data: {
 
-                    labels: labels,
+                    labels:
+                        Object.keys(
+                            categoryTotals
+                        ),
 
                     datasets: [
                         {
-                            data: values
+                            data:
+                                Object.values(
+                                    categoryTotals
+                                )
                         }
                     ]
+
                 }
+
             }
         );
 

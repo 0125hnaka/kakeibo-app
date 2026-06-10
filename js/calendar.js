@@ -1,31 +1,13 @@
+let currentMonth = "";
+
 function updateCalendarTitle() {
 
-    const month =
-        document.getElementById(
-            "expenseMonth"
-        ).value;
-
-    const title =
-        document.getElementById(
-            "calendarTitle"
-        );
-
-    title.textContent =
-        month;
+    document.getElementById(
+        "calendarTitle"
+    ).textContent =
+        currentMonth;
 
 }
-
-document.getElementById(
-    "expenseMonth"
-).addEventListener(
-    "change",
-    function() {
-
-        updateCalendarTitle();
-        renderCalendar();
-
-    }
-);
 
 document.getElementById(
     "prevMonth"
@@ -53,32 +35,32 @@ function moveMonth(
     offset
 ) {
 
-    const monthSelect =
-        document.getElementById(
-            "expenseMonth"
-        );
+    const expenses =
+        getExpenses();
 
-    const months = [];
+    const months =
+        [
+            ...new Set(
+                expenses.map(
+                    expense =>
+                    expense.date.substring(
+                        0,
+                        7
+                    )
+                )
+            )
+        ];
 
-    for (
-        let i = 0;
-        i < monthSelect.options.length;
-        i++
-    ) {
-
-        months.push(
-            monthSelect.options[i].value
-        );
-
-    }
+   months.sort().reverse();
 
     const currentIndex =
         months.indexOf(
-            monthSelect.value
+            currentMonth
         );
 
     const newIndex =
-        currentIndex + offset;
+        currentIndex +
+        offset;
 
     if (
         newIndex < 0 ||
@@ -89,22 +71,18 @@ function moveMonth(
 
     }
 
-    monthSelect.value =
+    currentMonth =
         months[newIndex];
 
     updateCalendarTitle();
     renderCalendar();
-
     renderExpenses();
-
 }
 
 function renderCalendar() {
 
     const month =
-        document.getElementById(
-            "expenseMonth"
-        ).value;
+        currentMonth;
 
     if (!month) {
         return;
@@ -181,18 +159,89 @@ function renderCalendar() {
 
             else {
 
-                html +=
-                `
-                <td>
-                    <div class="calendarDay">
-                        ${day}
-                    </div>
-                </td>
-                `;
+    const dayString =
+        String(day)
+            .padStart(2, "0");
 
-                day++;
+    const dateString =
+        month + "-" + dayString;
+
+    let income = 0;
+    let expense = 0;
+
+    getExpenses().forEach(
+        function(item) {
+
+            if (
+                item.date !==
+                dateString
+            ) {
+
+                return;
 
             }
+
+            if (
+                item.type ===
+                "income"
+            ) {
+
+                income +=
+                    item.amount;
+
+            }
+
+            else {
+
+                expense +=
+                    item.amount;
+
+            }
+
+        }
+    );
+
+    html +=
+    `
+    <td>
+
+        <div
+            class="calendarDay"
+            onclick="
+                jumpToDate(
+                    '${dateString}'
+                )
+            "
+        >
+            ${day}
+        </div>
+
+        ${
+            expense > 0
+            ?
+            `<div class="calendarExpense">
+                -${expense.toLocaleString()}
+            </div>`
+            :
+            ""
+        }
+
+        ${
+            income > 0
+            ?
+            `<div class="calendarIncome">
+                +${income.toLocaleString()}
+            </div>`
+            :
+            ""
+        }
+
+    </td>
+    `;
+
+    day++;
+
+}
 
         }
 
@@ -204,5 +253,29 @@ function renderCalendar() {
 
     container.innerHTML =
         html;
+
+}
+
+function jumpToDate(
+    date
+) {
+
+    const target =
+        document.getElementById(
+            "date-" + date
+        );
+
+    if (
+        target
+    ) {
+
+        target.scrollIntoView(
+            {
+                behavior:
+                    "smooth"
+            }
+        );
+
+    }
 
 }
