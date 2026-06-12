@@ -1,25 +1,52 @@
 function renderPayments() {
 
     const paymentSelect =
-        document.getElementById("payment");
+        document.getElementById(
+            "payment"
+        );
 
     paymentSelect.innerHTML = "";
+
+    const transactionType =
+        document.querySelector(
+            'input[name="transactionType"]:checked'
+        ).value;
 
     const payments =
         getPayments();
 
-    payments.forEach(function(payment) {
+    payments.forEach(
+        function(payment) {
 
-        const option =
-            document.createElement("option");
+            if (
+                transactionType ===
+                "income" &&
 
-        option.value = payment.name;
+                payment.type ===
+                "credit"
+            ) {
 
-        option.textContent = payment.name;
+                return;
 
-        paymentSelect.appendChild(option);
+            }
 
-    });
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                payment.name;
+
+            option.textContent =
+                payment.name;
+
+            paymentSelect.appendChild(
+                option
+            );
+
+        }
+    );
 
 }
 
@@ -103,6 +130,10 @@ addPaymentButton.addEventListener(
         );
 
         renderPayments();
+
+        renderCalendar();
+        
+        renderExpenses();
 
         document.getElementById(
             "newPayment"

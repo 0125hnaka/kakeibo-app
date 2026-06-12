@@ -199,9 +199,7 @@ function renderExpensePaymentSummary() {
         getExpenses();
 
     const selectedMonth =
-        document.getElementById(
-            "summaryMonth"
-        ).value;
+        expenseAnalysisMonth;
 
     const summary = {};
 

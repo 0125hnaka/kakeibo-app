@@ -100,6 +100,14 @@
 
             <br><br>
 
+            <input
+                type="text"
+                id="memo"
+                placeholder="メモ（任意）"
+            >
+
+            <br><br>
+
             <button
                 type="button"
                 id="saveButton"
@@ -206,6 +214,13 @@
                     class="analysis-tab"
                 >
                     収入
+                </button>
+
+                <button
+                    id="fixedAnalysisTab"
+                    class="analysis-tab"
+                >
+                    固定費
                 </button>
 
                 <button
@@ -333,27 +348,44 @@
                 style="display:none;"
             >
 
-                <h2>
-                    収入分析
-                </h2>
+                <div id="incomeMonthHeader">
+
+                    <button
+                        id="incomePrevMonth"
+                    >
+                        ◀
+                    </button>
+
+                    <span
+                        id="incomeMonthTitle"
+                    >
+                    </span>
+
+                    <button
+                        id="incomeNextMonth"
+                    >
+                        ▶
+                    </button>
+
+                </div>
 
                 <canvas
                     id="incomeCategoryChart"
                 >
                 </canvas>
 
-                <hr>
+                <div
+                    id="incomeTotalDisplay"
+                    class="summary-card"
+                >
+                </div>
 
-                <h3>
-                    収入内訳
-                </h3>
+                <hr>
 
                 <div
                     id="incomeSummary"
                 >
                 </div>
-
-            </div>
 
             </div>
 
@@ -413,6 +445,52 @@
                 <div
                     id="cardBillingList"
                 >           
+                </div>
+
+            </div>
+
+            <div
+                id="fixedAnalysisPage"
+                style="display:none;"
+            >
+
+                <div id="fixedMonthHeader">
+
+                    <button
+                        id="fixedPrevMonth"
+                    >
+                        ◀
+                    </button>
+
+                    <span
+                        id="fixedMonthTitle"
+                    >
+                    </span>
+
+                    <button
+                        id="fixedNextMonth"
+                     >
+                        ▶
+                    </button>
+
+                </div>
+
+                <canvas
+                    id="fixedCategoryChart"
+                >
+                </canvas>
+
+                <div
+                    id="fixedTotalDisplay"
+                    class="summary-card"
+                >
+                </div>
+
+                <hr>
+
+                <div
+                    id="fixedCategoryList"
+                >
                 </div>
 
             </div>
@@ -585,6 +663,55 @@
 
         <hr>
 
+        <h2>
+            固定費管理
+        </h2>
+
+        <input
+            type="text"
+            id="fixedExpenseName"
+            placeholder="名前"
+        >
+
+        <br><br>
+
+        <input
+            type="number"
+            id="fixedExpenseAmount"
+            placeholder="金額"
+        >
+
+        <br><br>
+
+        <input
+            type="number"
+            id="fixedExpenseDay"
+            placeholder="支払日"
+        >
+
+        <br><br>
+
+        <select
+            id="fixedExpensePayment"
+        >
+        </select>
+
+        <br><br>
+
+        <button
+            type="button"
+            id="addFixedExpenseButton"
+        >
+            固定費追加
+        </button>
+
+        <hr>
+
+        <div
+            id="fixedExpenseList"
+        >
+        </div>
+
         <h2>口座残高設定</h2>
 
         <input
@@ -649,7 +776,13 @@
             <select
                 id="editPayment"
             >
-            </select>
+        </select>
+
+            <input
+                type="text"
+                id="editMemo"
+                placeholder="メモ"
+            >
 
             <br><br>
 
@@ -725,6 +858,7 @@
     <script src="js/storage.js"></script>
     <script src="js/category.js"></script>
     <script src="js/payment.js"></script>
+    <script src="js/fixed-expense.js"></script>
     <script src="js/expense.js"></script>
     <script src="js/summary.js"></script>
     <script src="js/chart.js"></script>
@@ -738,7 +872,9 @@
     <script src="js/income-analysis.js"></script>
     <script src="js/income-chart.js"></script>
     <script src="js/card-analysis.js"></script>
+    <script src="js/fixed-analysis.js"></script>
     <script src="js/asset-analysis.js"></script>
+    <script src="js/fixed-expense-generator.js"></script>
     <script src="js/app.js"></script>
     <script src="js/analysis-navigation.js"></script>
 

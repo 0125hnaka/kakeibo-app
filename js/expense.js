@@ -119,6 +119,14 @@ function renderExpenses() {
             <div class="expense-row2">
 
                 <span>
+                    ${expense.memo || ""}
+                </span>
+
+            </div>
+
+            <div class="expense-row2">
+
+                <span>
                     ${expense.date}
                 </span>
 
@@ -205,6 +213,18 @@ saveButton.addEventListener(
         const amount =
             document.getElementById("amount").value;
 
+        if (
+            Number(amount) <= 0
+        ) {
+
+            alert(
+                 "金額は1円以上入力してください"
+            );
+
+            return;
+
+        }
+
         const date =
             document.getElementById("date").value;
 
@@ -213,6 +233,11 @@ saveButton.addEventListener(
 
         const payment =
             document.getElementById("payment").value;
+
+        const memo =
+            document.getElementById(
+                "memo"
+            ).value;    
 
         const transactionType =
             document.querySelector(
@@ -225,7 +250,8 @@ saveButton.addEventListener(
             amount: Number(amount),
             date: date,
             category: category,
-            payment: payment
+            payment: payment,
+            memo: memo
         };
 
         const expenses =
@@ -264,10 +290,15 @@ saveButton.addEventListener(
         renderPaymentSummary();
         renderCreditCardList();
         renderBalance();
+        renderCalendar();
 
         document.getElementById("amount").value = "";
         document.getElementById("category").selectedIndex = 0;
         document.getElementById("payment").selectedIndex = 0;
+
+        document.getElementById(
+            "memo"
+        ).value = "";
 
     }
 );
@@ -308,6 +339,7 @@ function deleteExpense(
         renderPaymentSummary();
         renderCreditCardList();
         recalculateBalance();
+        renderCalendar();
 
 }
 
@@ -421,6 +453,11 @@ function editExpense(
         expense.type;
 
     document.getElementById(
+        "editMemo"
+    ).value =
+        expense.memo || "";
+
+    document.getElementById(
         "editModal"
     ).style.display =
         "flex";
@@ -486,6 +523,11 @@ document.getElementById(
         expense.type =
             document.getElementById(
                 "editType"
+            ).value;
+
+        expense.memo =
+            document.getElementById(
+                "editMemo"
             ).value;
 
         saveExpenses(

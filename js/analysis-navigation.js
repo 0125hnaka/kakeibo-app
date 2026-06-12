@@ -1,3 +1,8 @@
+document.getElementById(
+        "fixedAnalysisPage"
+    ).style.display =
+        "none";
+
 function showAnalysisPage(
     pageId
 ) {
@@ -45,7 +50,6 @@ function showAnalysisPage(
 
             }
         );
-
 }
 
 document.getElementById(
@@ -100,6 +104,11 @@ document.getElementById(
             "active"
         );
 
+        renderIncomeSummary();
+
+        renderIncomeChart();
+
+
     }
 );
 
@@ -136,3 +145,22 @@ document.getElementById(
 
     }
 );
+
+document.getElementById(
+        "fixedAnalysisTab"
+    ).addEventListener(
+        "click",
+        function() {
+
+            showAnalysisPage(
+                "fixedAnalysisPage"
+            );
+
+            this.classList.add(
+                "active"
+            );
+
+            renderFixedAnalysis();
+
+        }
+    );

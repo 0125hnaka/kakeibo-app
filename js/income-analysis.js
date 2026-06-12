@@ -1,3 +1,48 @@
+let incomeAnalysisMonth = "";
+
+function initializeIncomeAnalysis() {
+
+    const expenses =
+        getExpenses();
+
+    const months =
+        [
+            ...new Set(
+                expenses.map(
+                    expense =>
+                    expense.date.substring(
+                        0,
+                        7
+                    )
+                )
+            )
+        ];
+
+    months.sort().reverse();
+
+    incomeAnalysisMonth =
+        months[0] || "";
+
+    updateIncomeMonthTitle();
+
+}
+
+function updateIncomeMonthTitle() {
+
+    const title =
+        document.getElementById(
+            "incomeMonthTitle"
+        );
+
+    if (!title) {
+        return;
+    }
+
+    title.textContent =
+        incomeAnalysisMonth;
+
+}
+
 function renderIncomeRanking() {
 
     const expenses =
@@ -117,9 +162,7 @@ function renderIncomeSummary() {
         getExpenses();
 
     const selectedMonth =
-        document.getElementById(
-            "summaryMonth"
-        ).value;
+        incomeAnalysisMonth;
 
     const summary = {};
 
@@ -165,6 +208,33 @@ function renderIncomeSummary() {
         }
     );
 
+    let total = 0;
+
+    Object.values(
+        summary
+    ).forEach(
+        amount => {
+
+            total += amount;
+
+        }
+    );
+
+    document.getElementById(
+        "incomeTotalDisplay"
+    ).innerHTML =
+    `
+        <div>
+            収入合計
+        </div>
+
+        <div
+            class="card-total"
+        >
+            ${total.toLocaleString()}円
+        </div>
+        `;
+
     const container =
         document.getElementById(
             "incomeSummary"
@@ -189,23 +259,129 @@ function renderIncomeSummary() {
         div.className =
             "ranking-item";
 
-        div.innerHTML =
-            `
-            <span>
-                ${category}
-            </span>
-
-            <span>
-                ${summary[
+        const percent =
+            total === 0
+            ? 0
+            :
+            (
+                summary[
                     category
-                ].toLocaleString()}円
-            </span>
-            `;
+                ]
+                /
+                total
+            ) * 100;
+
+        div.innerHTML =
+        `
+        <div>
+
+            <strong>
+                ${category}
+            </strong>
+
+            <br>
+
+            ${
+                summary[
+                    category
+                ].toLocaleString()
+            }円
+
+        </div>
+
+        <div>
+
+            ${percent.toFixed(
+                1
+            )}%
+
+        </div>
+        `;
 
         container.appendChild(
             div
         );
 
     }
+
+}
+
+document.getElementById(
+    "incomePrevMonth"
+).addEventListener(
+    "click",
+    function() {
+
+        moveIncomeMonth(
+            -1
+        );
+
+    }
+);
+
+document.getElementById(
+    "incomeNextMonth"
+).addEventListener(
+    "click",
+    function() {
+
+        moveIncomeMonth(
+            1
+        );
+
+    }
+);
+
+function moveIncomeMonth(
+    direction
+) {
+
+    const expenses =
+        getExpenses();
+
+    const months =
+        [
+            ...new Set(
+                expenses.map(
+                    expense =>
+                    expense.date.substring(
+                        0,
+                        7
+                    )
+                )
+            )
+        ];
+
+    months.sort();
+
+    const currentIndex =
+        months.indexOf(
+            incomeAnalysisMonth
+        );
+
+    const nextIndex =
+        currentIndex +
+        direction;
+
+    if (
+        nextIndex < 0 ||
+        nextIndex >=
+        months.length
+    ) {
+
+        return;
+
+    }
+
+    incomeAnalysisMonth =
+        months[
+            nextIndex
+        ];
+
+    updateIncomeMonthTitle();
+
+    renderIncomeSummary();
+
+    renderIncomeChart();
 
 }

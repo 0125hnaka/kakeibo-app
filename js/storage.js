@@ -181,3 +181,31 @@ function savePaidBills(
     );
 
 }
+
+function getFixedExpenses() {
+
+    const data =
+        localStorage.getItem(
+            "fixedExpenses"
+        );
+
+    if (data === null) {
+        return [];
+    }
+
+    return JSON.parse(data);
+
+}
+
+function saveFixedExpenses(
+    fixedExpenses
+) {
+
+    localStorage.setItem(
+        "fixedExpenses",
+        JSON.stringify(
+            fixedExpenses
+        )
+    );
+
+}

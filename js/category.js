@@ -111,6 +111,8 @@ transactionTypeRadios.forEach(
 
                 renderCategories();
 
+                renderPayments();
+
             }
         );
 
