@@ -1,3 +1,6 @@
+let currentSummaryMonth =
+    "";
+
 function renderPaymentSummary() {
 
     const expenses =
@@ -6,9 +9,7 @@ function renderPaymentSummary() {
     const summary = {};
 
     const selectedMonth =
-    document.getElementById(
-        "summaryMonth"
-    ).value;
+        currentSummaryMonth;
 
     expenses.forEach(function(expense) {
 
@@ -70,12 +71,82 @@ function renderMonthSelector() {
     const expenses =
         getExpenses();
 
-    const monthSelect =
-        document.getElementById(
-            "summaryMonth"
+    const months = [];
+
+    expenses.forEach(
+        function(expense) {
+
+            const month =
+                expense.date.substring(
+                    0,
+                    7
+                );
+
+            if (
+                !months.includes(
+                    month
+                )
+            ) {
+
+                months.push(
+                    month
+                );
+
+            }
+
+        }
+    );
+
+    months.sort().reverse();
+
+    if (
+        !currentSummaryMonth
+    ) {
+
+        currentSummaryMonth =
+            months[0];
+
+    }
+
+    document.getElementById(
+        "summaryMonthLabel"
+    ).textContent =
+        currentSummaryMonth;
+
+}
+
+document.getElementById(
+    "summaryPrevMonth"
+).addEventListener(
+    "click",
+    function() {
+
+        changeSummaryMonth(
+            -1
         );
 
-    monthSelect.innerHTML = "";
+    }
+);
+
+document.getElementById(
+    "summaryNextMonth"
+).addEventListener(
+    "click",
+    function() {
+
+        changeSummaryMonth(
+            1
+        );
+
+    }
+);
+
+function changeSummaryMonth(
+    direction
+) {
+
+    const expenses =
+        getExpenses();
 
     const months = [];
 
@@ -89,233 +160,56 @@ function renderMonthSelector() {
                 );
 
             if (
-                !months.includes(month)
+                !months.includes(
+                    month
+                )
             ) {
 
-                months.push(month);
+                months.push(
+                    month
+                );
 
             }
 
         }
     );
 
-    months.sort().reverse();
+    months.sort();
 
-    months.forEach(
-        function(month) {
+    const currentIndex =
+        months.indexOf(
+            currentSummaryMonth
+        );
 
-            const option =
-                document.createElement(
-                    "option"
-                );
+    const nextIndex =
+        currentIndex +
+        direction;
 
-            option.value = month;
-            option.textContent = month;
+    if (
+        nextIndex < 0 ||
+        nextIndex >= months.length
+    ) {
 
-            monthSelect.appendChild(
-                option
-            );
-
-        }
-    );
-
-}
-
-const summaryMonth =
-    document.getElementById(
-        "summaryMonth"
-    );
-
-summaryMonth.addEventListener(
-    "change",
-    function() {
-
-        renderPaymentSummary();
-        renderCreditCardList();
-        renderCategoryChart();
-        renderSummaryCards();
-        renderExpenseAnalysis();
-        renderExpensePaymentSummary();
-        renderIncomeRanking();
-        renderIncomeSummary();
-        renderIncomeChart();
-        renderAssetAnalysis();
+        return;
 
     }
-);
 
-function renderCreditCardList() {
+    currentSummaryMonth =
+        months[nextIndex];
 
-    const payments =
-        getPayments();
+    document.getElementById(
+        "summaryMonthLabel"
+    ).textContent =
+        currentSummaryMonth;
 
-    const expenses =
-        getExpenses();
-
-    const paidBills =
-        getPaidBills();
-
-    const creditCardList =
-        document.getElementById(
-            "creditCardList"
-        );
-
-    creditCardList.innerHTML = "";
-
-    const creditCards =
-        payments.filter(
-            function(payment) {
-
-                return (
-                    payment.type ===
-                    "credit"
-                );
-
-            }
-        );
-
-    creditCards.forEach(
-        function(card) {
-
-            const cardDiv =
-                document.createElement(
-                    "div"
-                );
-
-            cardDiv.className =
-                "credit-card-box";
-
-            const title =
-                document.createElement(
-                    "h3"
-                );
-
-            title.className =
-                "credit-card-title";
-
-            title.textContent =
-                `${card.name}（支払日:${card.paymentDay}日）`;
-
-            cardDiv.appendChild(
-                title
-            );
-
-            const months = [];
-
-            expenses.forEach(
-                function(expense) {
-
-                    if (
-                        expense.payment ===
-                        card.name
-                    ) {
-
-                        const month =
-                            expense.date.substring(
-                                0,
-                                7
-                            );
-
-                        if (
-                            !months.includes(
-                                month
-                            )
-                        ) {
-
-                            months.push(
-                                month
-                            );
-
-                        }
-
-                    }
-
-                }
-            );
-
-            months.sort().reverse();
-
-            months.forEach(
-                function(month) {
-
-                    let total = 0;
-
-                    expenses.forEach(
-                        function(expense) {
-
-                            if (
-                                expense.payment ===
-                                    card.name &&
-                                expense.date.substring(
-                                    0,
-                                    7
-                                ) === month
-                            ) {
-
-                                total +=
-                                    expense.amount;
-
-                            }
-
-                        }
-                    );
-
-                    const paid =
-                        paidBills.some(
-                            function(bill) {
-
-                                return (
-                                    bill.cardName ===
-                                        card.name &&
-                                    bill.targetMonth ===
-                                        month
-                                );
-
-                            }
-                        );
-
-                    const item =
-                        document.createElement(
-                            "div"
-                        );
-
-                    item.innerHTML =
-                        `
-                        <div>
-                            ${month}
-                        </div>
-
-                        <div>
-                            ${total.toLocaleString()}円
-                        </div>
-
-                        <div>
-                            ${
-                            paid
-                            ? "請求済"
-                            : "未請求"
-                            }
-                        </div>
-                        `;
-
-                    cardDiv.appendChild(
-                        item
-                    );
-
-                }
-            );
-
-            creditCardList.appendChild(
-                cardDiv
-            );
-
-            creditCardList.appendChild(
-                document.createElement(
-                    "hr"
-                )
-            );
-
-        }
-    );
+    renderPaymentSummary();
+    renderCategoryChart();
+    renderSummaryCards();
+    renderExpenseAnalysis();
+    renderExpensePaymentSummary();
+    renderIncomeRanking();
+    renderIncomeSummary();
+    renderIncomeChart();
+    renderAssetAnalysis();
 
 }

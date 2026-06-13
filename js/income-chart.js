@@ -4,9 +4,7 @@ function renderIncomeChart() {
         getExpenses();
 
     const selectedMonth =
-        document.getElementById(
-            "summaryMonth"
-        ).value;
+        currentSummaryMonth;
 
     const categoryTotals =
         {};

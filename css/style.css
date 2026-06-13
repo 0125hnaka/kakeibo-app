@@ -136,6 +136,20 @@ button {
 
     font-size: 16px;
 
+    width: 70px;
+
+    height: 45px;
+
+    padding: 0;
+
+    margin: 0;
+
+    border-radius: 12px;
+
+    transition: none;
+
+    box-sizing: border-box;
+
 }
 
 h1 {
@@ -820,5 +834,489 @@ label {
 .history-filter select {
 
     flex: 1;
+
+}
+
+.setting-group {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 2px 8px
+        rgba(
+            0,
+            0,
+            0,
+            0.08
+        );
+
+}
+
+.setting-group-title {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+
+    color: #666;
+
+}
+
+.setting-item {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    padding: 10px 0;
+
+    border-bottom:
+        1px solid #eee;
+
+}
+
+.setting-item:last-child {
+
+    border-bottom: none;
+
+}
+
+.delete-btn {
+
+    background: #ff6b6b;
+
+    color: white;
+
+    padding: 8px 14px;
+
+    border-radius: 10px;
+
+}
+
+#addCategoryButton {
+
+    width: 100%;
+
+    background: #4CAF50;
+
+    color: white;
+
+    font-size: 16px;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+}
+
+.category-type-group {
+
+    display: flex;
+
+    gap: 40px;
+
+    align-items: center;
+
+    margin-top: 20px;
+
+    margin-bottom: 20px;
+
+}
+
+.category-type-group label {
+
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    align-items: center !important;
+
+    gap: 10px;
+
+    white-space: nowrap;
+
+}
+
+#addPaymentButton {
+
+    width: 100%;
+
+    background: #4CAF50;
+
+    color: white;
+
+    font-size: 16px;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+}
+
+.payment-type-group {
+
+    display: flex;
+
+    gap: 40px;
+
+    align-items: center;
+
+    margin-top: 20px;
+
+    margin-bottom: 20px;
+
+}
+
+.payment-type-group label {
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    gap: 8px;
+
+    white-space: nowrap;
+
+}
+
+.fixed-expense-form {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 2px 8px
+        rgba(
+            0,
+            0,
+            0,
+            0.08
+        );
+
+}
+
+.fixed-expense-title {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+
+    color: #666;
+
+}
+
+.button-row {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
+}
+
+#addFixedExpenseButton {
+
+    width: 100%;
+
+    background: #4CAF50;
+
+    color: white;
+
+    font-size: 16px;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+}
+
+.fixed-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+
+}
+
+.payment-badge {
+
+    background: #f1f3f5;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+
+}
+
+.fixed-amount {
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    margin-top: 15px;
+
+    color: #222;
+
+}
+
+.fixed-day {
+
+    color: #777;
+
+    margin-top: 6px;
+
+    margin-bottom: 16px;
+
+}
+
+.edit-btn {
+
+    background: #4dabf7;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 18px;
+
+    border-radius: 10px;
+
+}
+
+.delete-btn {
+
+    background: #ff6b6b;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 18px;
+
+    border-radius: 10px;
+
+}
+
+.balance-setting-form {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 2px 8px
+        rgba(
+            0,
+            0,
+            0,
+            0.08
+        );
+
+}
+
+.balance-setting-title {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+
+    color: #666;
+
+}
+
+#saveBalanceButton {
+
+    width: 100%;
+
+    background: #4CAF50;
+
+    color: white;
+
+    font-size: 16px;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+}
+
+.history-filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.history-filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.summary-wide-card {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 10px;
+
+    margin-top: 20px;
+
+    text-align: center;
+
+}
+
+.summary-wide-card-title {
+
+    color: #777;
+
+    font-size: 16px;
+
+}
+
+.summary-wide-card-value {
+
+    font-size: 42px;
+
+    font-weight: bold;
+
+    margin-top: 12px;
+
+}
+
+.credit-card-item {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    margin-bottom: 15px;
+
+    box-shadow:
+        0 2px 8px
+        rgba(
+            0,
+            0,
+            0,
+            0.08
+        );
+
+}
+
+.credit-card-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+}
+
+.credit-card-name {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+}
+
+.credit-card-amount {
+
+    font-size: 18px;
+
+    margin-top: 10px;
+
+}
+
+.credit-card-info {
+
+    text-align: right;
+
+    color: #666;
+
+    line-height: 1.8;
+
+}
+
+.credit-card-percent {
+
+    font-weight: bold;
+
+    color: #4CAF50;
+
+}
+
+.credit-total-card {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+
+}
+
+.credit-total-title {
+
+    color: #777;
+
+    font-size: 18px;
+
+}
+
+.credit-total-value {
+
+    font-size: 48px;
+
+    font-weight: bold;
+
+    margin-top: 15px;
+
+}
+
+.bottom-nav-active {
+
+    background: #4CAF50 !important;
+
+    color: white !important;
 
 }

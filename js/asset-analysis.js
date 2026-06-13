@@ -10,9 +10,7 @@ function renderAssetAnalysis() {
         + "円";
 
     const selectedMonth =
-        document.getElementById(
-            "summaryMonth"
-        ).value;
+        currentSummaryMonth;
 
     const expenses =
         getExpenses();

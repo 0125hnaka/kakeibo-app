@@ -49,9 +49,7 @@ function renderIncomeRanking() {
         getExpenses();
 
     const selectedMonth =
-        document.getElementById(
-            "summaryMonth"
-        ).value;
+        currentSummaryMonth;
 
     const ranking = {};
 

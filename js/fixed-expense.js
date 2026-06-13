@@ -1,3 +1,6 @@
+let editingFixedExpenseId =
+    null;
+
 function renderFixedExpensePayments() {
 
     const select =
@@ -13,6 +16,42 @@ function renderFixedExpensePayments() {
 
     getPayments()
     .forEach(
+        function(payment) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                payment.name;
+
+            option.textContent =
+                payment.name;
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+function renderEditFixedPayments() {
+
+    const select =
+        document.getElementById(
+            "editFixedPayment"
+        );
+
+    if (!select) {
+        return;
+    }
+
+    select.innerHTML = "";
+
+    getPayments().forEach(
         function(payment) {
 
             const option =
@@ -58,29 +97,50 @@ function renderFixedExpenseList() {
                 );
 
             div.className =
-                "expense-card";
+                "setting-group";
 
             div.innerHTML =
-                `
+            `
+
+            <div class="fixed-header">
+
                 <strong>
                     ${item.name}
                 </strong>
 
-                <br>
+                <span class="payment-badge">
+                    ${item.payment}
+                </span>
+
+            </div>
+
+            <div class="fixed-amount">
 
                 ${item.amount.toLocaleString()}円
 
-                <br>
+            </div>
+
+            <div class="fixed-day">
 
                 毎月${item.day}日
 
-                <br>
+            </div>
 
-                ${item.payment}
-
-                <br><br>
+            <div class="button-row">
 
                 <button
+                    class="edit-btn"
+                    onclick="
+                        openFixedExpenseEdit(
+                            ${item.id}
+                        )
+                    "
+                >
+                    編集
+                </button>
+
+                <button
+                    class="delete-btn"
                     onclick="
                         deleteFixedExpense(
                             ${item.id}
@@ -89,7 +149,9 @@ function renderFixedExpenseList() {
                 >
                     削除
                 </button>
-                `;
+
+            </div>
+            `;
 
                         list.appendChild(
                             div
@@ -177,3 +239,122 @@ function deleteFixedExpense(
     renderFixedExpenseList();
 
 }
+
+function openFixedExpenseEdit(
+    id
+) {
+
+    const item =
+        getFixedExpenses()
+        .find(
+            expense =>
+                expense.id === id
+        );
+
+    if (!item) {
+        return;
+    }
+
+    editingFixedExpenseId =
+        id;
+
+    document.getElementById(
+        "editFixedName"
+    ).value =
+        item.name;
+
+    document.getElementById(
+        "editFixedAmount"
+    ).value =
+        item.amount;
+
+    document.getElementById(
+        "editFixedDay"
+    ).value =
+        item.day;
+
+    renderEditFixedPayments();
+
+    document.getElementById(
+        "editFixedPayment"
+    ).value =
+        item.payment;
+
+    document.getElementById(
+        "fixedExpenseEditModal"
+    ).style.display =
+        "flex";
+
+}
+
+document.getElementById(
+    "cancelFixedEditButton"
+).addEventListener(
+    "click",
+    function() {
+
+        document.getElementById(
+            "fixedExpenseEditModal"
+        ).style.display =
+            "none";
+
+    }
+);
+
+document.getElementById(
+    "saveFixedEditButton"
+).addEventListener(
+    "click",
+    function() {
+
+        const fixedExpenses =
+            getFixedExpenses();
+
+        const item =
+            fixedExpenses.find(
+                expense =>
+                    expense.id ===
+                    editingFixedExpenseId
+            );
+
+        if (!item) {
+            return;
+        }
+
+        item.name =
+            document.getElementById(
+                "editFixedName"
+            ).value;
+
+        item.amount =
+            Number(
+                document.getElementById(
+                    "editFixedAmount"
+                ).value
+            );
+
+        item.day =
+            Number(
+                document.getElementById(
+                    "editFixedDay"
+                ).value
+            );
+
+        item.payment =
+            document.getElementById(
+                "editFixedPayment"
+            ).value;
+
+        saveFixedExpenses(
+            fixedExpenses
+        );
+
+        renderFixedExpenseList();
+
+        document.getElementById(
+            "fixedExpenseEditModal"
+        ).style.display =
+            "none";
+
+    }
+);

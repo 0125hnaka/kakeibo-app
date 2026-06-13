@@ -90,6 +90,8 @@ addCategoryButton.addEventListener(
 
         renderCategories();
 
+        renderCategoryList();
+
         document.getElementById(
             "newCategory"
         ).value = "";
@@ -118,3 +120,191 @@ transactionTypeRadios.forEach(
 
     }
 );
+
+function renderCategoryList() {
+
+    const container =
+        document.getElementById(
+            "categoryList"
+        );
+
+    container.innerHTML =
+        "";
+
+    const expenseCategories =
+        getCategories().filter(
+             function(category) {
+
+                return (
+                    category.type ===
+                    "expense"
+                );
+
+            }
+        );
+
+    const incomeCategories =
+        getCategories().filter(
+            function(category) {
+
+                return (
+                    category.type ===
+                    "income"
+                );
+
+            }
+        );
+
+    container.innerHTML =
+    `
+    <div class="setting-group">
+
+        <div class="setting-group-title">
+            支出カテゴリ
+        </div>
+
+        <div
+            id="expenseCategoryArea"
+        >
+        </div>
+
+    </div>
+
+    <div class="setting-group">
+
+        <div class="setting-group-title">
+            収入カテゴリ
+        </div>
+
+        <div
+            id="incomeCategoryArea"
+        >
+        </div>
+
+    </div>
+    `;
+
+    const expenseArea =
+        document.getElementById(
+            "expenseCategoryArea"
+    );
+
+    expenseCategories.forEach(
+        function(category) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.className =
+                "setting-item";
+
+            div.innerHTML =
+                `
+                <span>
+                    ${category.name}
+                </span>
+
+                <button
+                    class="delete-btn"
+                    onclick="
+                        deleteCategory(
+                            '${category.name}',
+                            '${category.type}'
+                        )
+                    "
+                >
+                    削除
+                </button>
+             `;
+
+            expenseArea.appendChild(
+                div
+            );
+        } 
+    );
+
+    const incomeArea =
+        document.getElementById(
+            "incomeCategoryArea"
+        );
+
+    incomeCategories.forEach(
+        function(category) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.className =
+                "setting-item";
+
+            div.innerHTML =
+                `
+                <span>
+                    ${category.name}
+                </span>
+
+                <button
+                    class="delete-btn"
+                    onclick="
+                        deleteCategory(
+                            '${category.name}',
+                            '${category.type}'
+                        )
+                    "
+                >
+                    削除
+                </button>
+                `;
+
+            incomeArea.appendChild(
+                div
+            );
+
+        }
+    );
+
+}
+
+function deleteCategory(
+    name,
+    type
+) {
+
+    if (
+        !confirm(
+            "カテゴリを削除しますか？"
+        )
+    ) {
+
+        return;
+
+    }
+
+    const categories =
+        getCategories()
+        .filter(
+            category =>
+                !(
+                    category.name ===
+                    name
+                    &&
+                    category.type ===
+                    type
+                )
+        );
+
+    saveCategories(
+        categories
+    );
+
+    renderCategories();
+
+    renderHistoryFilters();
+
+    renderCategoryList();
+
+}

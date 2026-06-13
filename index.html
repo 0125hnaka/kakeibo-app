@@ -178,8 +178,6 @@
 
         </div>
 
-        <br>
-
         <div id="expenseList">
     </div>
 
@@ -243,8 +241,27 @@
 
                 <h3>集計対象月</h3>
 
-                <select id="summaryMonth">
-                </select>
+                <div class="month-navigation">
+
+                    <button
+                        id="summaryPrevMonth"
+                >
+                        ◀
+                    </button>
+
+                    <span
+                        id="summaryMonthLabel"
+                    >
+                        2026-06
+                    </span>
+
+                    <button
+                        id="summaryNextMonth"
+                    >
+                        ▶
+                    </button>
+
+                </div>
 
                 <div class="summary-cards">
 
@@ -286,13 +303,49 @@
 
                 </div>
 
-                <hr>
+                <div class="summary-wide-card">
 
-                <h3>
-                    クレジットカード管理
-                </h3>
+                    <div class="summary-wide-card-title">
+                        現在残高
+                    </div>
 
-                <div id="creditCardList">
+                    <div
+                        id="summarySavingBalance"
+                        class="summary-wide-card-value"
+                    >
+                        0円
+                    </div>
+
+                </div>
+
+                <div class="summary-wide-card">
+
+                    <div class="summary-wide-card-title">
+                        クレカ未請求額
+                    </div>
+
+                    <div
+                       id="summaryUnpaidCard"
+                       class="summary-wide-card-value"
+                    >
+                       0円
+                    </div>
+
+                </div>
+
+                <div class="summary-wide-card">
+
+                    <div class="summary-wide-card-title">
+                        固定費合計
+                    </div>
+
+                    <div
+                       id="summaryFixedTotal"
+                        class="summary-wide-card-value"
+                    >
+                        0円
+                    </div>
+
                 </div>
 
             </div>
@@ -475,11 +528,6 @@
 
                 </div>
 
-                <canvas
-                    id="fixedCategoryChart"
-                >
-                </canvas>
-
                 <div
                     id="fixedTotalDisplay"
                     class="summary-card"
@@ -574,28 +622,34 @@
             placeholder="新しいカテゴリ"
         >
 
-        <br><br>
+        <div class="category-type-group">
 
-        <label>
-            <input
+            <label>
+
+                <input
                 type="radio"
                 name="categoryType"
                 value="expense"
                 checked
             >
+
             支出
+
         </label>
 
         <label>
+
             <input
                 type="radio"
                 name="categoryType"
                 value="income"
             >
+
             収入
+
         </label>
 
-        <br><br>
+    </div>
 
         <button
             type="button"
@@ -603,6 +657,13 @@
         >
             カテゴリ追加
         </button>
+
+        <br><br>
+
+        <div
+            id="categoryList"
+        >
+        </div>
 
         <hr>
 
@@ -614,37 +675,47 @@
             placeholder="新しい支払方法"
         >
 
-        <br><br>
 
-        <label>
+        <div class="payment-type-group">
+
+            <label>
+
             <input
                 type="radio"
                 name="paymentType"
                 value="cash"
                 checked
             >
-            現金
+
+            <span>現金</span>
+
         </label>
 
         <label>
+
             <input
                 type="radio"
                 name="paymentType"
                 value="emoney"
             >
-            電子マネー
+
+            <span>電子マネー</span>
+
         </label>
 
         <label>
+
             <input
                 type="radio"
                 name="paymentType"
                 value="credit"
             >
-            クレジットカード
+
+            <span>クレジットカード</span>
+
         </label>
 
-        <br><br>
+    </div>
 
         <input
             type="number"
@@ -661,35 +732,50 @@
             支払方法追加
         </button>
 
+        <br><br>
+
+        <div
+            id="paymentList"
+        >
+        </div>
+
         <hr>
 
         <h2>
             固定費管理
         </h2>
 
-        <input
-            type="text"
-            id="fixedExpenseName"
-            placeholder="名前"
-        >
+        <div class="fixed-expense-form">
 
-        <br><br>
+            <div class="fixed-expense-title">
+                新しい固定費
+            </div>
 
-        <input
-            type="number"
-            id="fixedExpenseAmount"
-            placeholder="金額"
-        >
+            <input
+                type="text"
+                id="fixedExpenseName"
+                placeholder="名前"
+            >
 
-        <br><br>
+            <br><br>
 
-        <input
-            type="number"
-            id="fixedExpenseDay"
-            placeholder="支払日"
-        >
+            <input
+                type="number"
+                id="fixedExpenseAmount"
+                placeholder="金額"
+            >
 
-        <br><br>
+            <br><br>
+
+            <input
+                type="number"
+                id="fixedExpenseDay"
+                placeholder="支払日"
+            >
+
+            <br><br>
+
+        </div>
 
         <select
             id="fixedExpensePayment"
@@ -708,24 +794,120 @@
         <hr>
 
         <div
+            id="fixedExpenseEditModal"
+            class="modal"
+            style="display:none;"
+        >
+
+            <div class="modal-content">
+
+                <h2>
+                    固定費編集
+                </h2>
+
+            <input
+                type="text"
+                id="editFixedName"
+                placeholder="名前"
+            >
+
+            <br><br>
+
+            <input
+                type="number"
+                id="editFixedAmount"
+                placeholder="金額"
+            >
+
+            <br><br>
+
+            <input
+                type="number"
+                id="editFixedDay"
+                placeholder="支払日"
+            >
+
+            <br><br>
+
+            <select
+                id="editFixedPayment"
+            >
+            </select>
+
+            <br><br>
+
+            <button
+                id="saveFixedEditButton"
+            >
+                保存
+            </button>
+
+            <button
+                id="cancelFixedEditButton"
+            >
+                キャンセル
+            </button>
+
+        </div>
+
+        </div>
+
+        <h3 class="fixed-expense-title">
+            登録済み固定費
+        </h3>
+
+        <div
             id="fixedExpenseList"
         >
         </div>
 
         <h2>口座残高設定</h2>
 
-        <input
-            type="number"
-            id="balanceInput"
-            placeholder="残高入力"
-        >
+        <div class="balance-setting-form">
+
+            <div class="balance-setting-title">
+                現在残高
+            </div>
+
+            <input
+                id="balanceInput"
+                placeholder="残高入力"
+            >
+
+            <br><br>
+
+            <button
+                id="saveBalanceButton"
+            >
+                残高保存
+            </button>
+
+        </div>
+
+        <hr>
+
+        <h2>データ管理</h2>
 
         <button
             type="button"
-            id="saveBalanceButton"
+            id="exportDataButton"
         >
-            残高保存
+            バックアップ作成
         </button>
+
+        <button
+            type="button"
+            id="importDataButton"
+        >
+           バックアップ復元
+        </button>
+
+        <input
+            type="file"
+            id="importFile"
+            accept=".json"
+            style="display:none;"
+        >
 
         <hr>
 
@@ -877,5 +1059,6 @@
     <script src="js/fixed-expense-generator.js"></script>
     <script src="js/app.js"></script>
     <script src="js/analysis-navigation.js"></script>
+    <script src="js/backup.js"></script>
 
 </body>

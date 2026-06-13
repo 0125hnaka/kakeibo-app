@@ -45,6 +45,10 @@ document.getElementById(
             "inputPage"
         );
 
+        setActiveBottomTab(
+            "inputTab"
+        );
+
     }
 );
 
@@ -56,6 +60,10 @@ document.getElementById(
 
         showPage(
             "historyPage"
+        );
+
+        setActiveBottomTab(
+            "historyTab"
         );
 
     }
@@ -70,6 +78,11 @@ document.getElementById(
         showPage(
             "analysisPage"
         );
+
+        setActiveBottomTab(
+            "analysisTab"
+        );
+
         renderSummaryCards();
 
     }
@@ -85,5 +98,35 @@ document.getElementById(
             "settingsPage"
         );
 
+        setActiveBottomTab(
+            "settingsTab"
+        );
+
     }
 );
+
+function setActiveBottomTab(
+    tabId
+) {
+
+    document
+        .querySelectorAll(
+            "#bottomNav button"
+        )
+        .forEach(
+            function(button) {
+
+                button.classList.remove(
+                    "bottom-nav-active"
+                );
+
+            }
+        );
+
+    document.getElementById(
+        tabId
+    ).classList.add(
+        "bottom-nav-active"
+    );
+
+}

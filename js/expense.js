@@ -288,9 +288,10 @@ saveButton.addEventListener(
 
         renderMonthSelector();
         renderPaymentSummary();
-        renderCreditCardList();
         renderBalance();
         renderCalendar();
+        renderCardUsage();
+        renderCardBilling();
 
         document.getElementById("amount").value = "";
         document.getElementById("category").selectedIndex = 0;
@@ -337,7 +338,6 @@ function deleteExpense(
 
         renderMonthSelector();
         renderPaymentSummary();
-        renderCreditCardList();
         recalculateBalance();
         renderCalendar();
 
@@ -541,10 +541,6 @@ document.getElementById(
         renderMonthSelector();
 
         renderPaymentSummary();
-
-        renderCreditCardList();
-
-        renderExpenseRanking();
 
         renderIncomeRanking();
 

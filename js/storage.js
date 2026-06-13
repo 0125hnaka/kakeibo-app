@@ -28,38 +28,90 @@ function getCategories() {
     if (data === null) {
 
         const defaultCategories = [
+            // 支出
+
             {
                 name: "食費",
                 type: "expense"
             },
+
             {
-                name: "日用品",
+                name: "外食費",
                 type: "expense"
             },
+
             {
                 name: "交通費",
                 type: "expense"
             },
+
+            {
+                name: "衣服",
+                type: "expense"
+            },
+
+            {
+                name: "サブスク",
+                type: "expense"
+            },
+
+            {
+                name: "通信費",
+                type: "expense"
+            },
+
+
+            {
+                name: "交際費",
+               type: "expense"
+            },
+
             {
                 name: "趣味",
                 type: "expense"
             },
+
             {
-                name: "給与",
+                name: "病院",
+                type: "expense"
+            },
+
+            { 
+                name: "遊び",
+                type: "expense"
+            },
+
+            {
+                name: "返却",
+                type: "expense"
+            },
+
+            {
+                name: "その他",
+                type: "expense"
+            },
+
+            // 収入
+
+            {
+                name: "給料",
                 type: "income"
             },
-            { 
-                name:"ボーナス",
-                type:"income"
-            },
+
             {
-                name:"口座入金",
-                type:"income"
+                name: "賞与",
+                type: "income"
             },
+
             {
-                name:"口座出金",
-                type:"expense"
+                name: "返却",
+                type: "income"
             },
+
+            {
+                name: "その他",
+                type: "income"
+            }
         ];
 
         localStorage.setItem(
@@ -103,9 +155,27 @@ function getPayments() {
             },
 
             {
-                name: "楽天カード",
+                name: "PayPayカード",
                 type: "credit",
                 paymentDay: 27
+            },
+
+            {
+                name: "ゴールドNL",
+                 type: "credit",
+                paymentDay: 26
+            },
+
+            {
+                name: "AmazonPrimeカード",
+                type: "credit",
+                paymentDay: 26
+            },
+
+            {
+                name: "Viewカード",
+                type: "credit",
+                paymentDay: 4
             }
 
         ];
@@ -209,3 +279,49 @@ function saveFixedExpenses(
     );
 
 }
+
+const backupData = {
+
+    expenses:
+        JSON.parse(
+            localStorage.getItem(
+                "expenses"
+            )
+        ) || [],
+
+    categories:
+        JSON.parse(
+            localStorage.getItem(
+                "categories"
+            )
+        ) || [],
+
+    payments:
+        JSON.parse(
+            localStorage.getItem(
+                "payments"
+            )
+        ) || [],
+
+    fixedExpenses:
+        JSON.parse(
+            localStorage.getItem(
+                "fixedExpenses"
+            )
+        ) || [],
+
+    paidBills:
+        JSON.parse(
+            localStorage.getItem(
+                "paidBills"
+            )
+        ) || [],
+
+    balance:
+        Number(
+            localStorage.getItem(
+                "balance"
+            )
+        ) || 0
+
+};

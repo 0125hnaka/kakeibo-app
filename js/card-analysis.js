@@ -108,17 +108,17 @@ function renderCardUsage() {
     );
 
     document.getElementById(
-        "cardBillingTotal"
+        "cardUsageTotal"
     ).innerHTML =
-        `
-        <div>
-            合計請求額
-        </div>
+    `
+    <div class="credit-total-title">
+        合計利用額
+    </div>
 
-        <div class="card-total">
-            ${total.toLocaleString()}円
-        </div>
-        `;
+    <div class="credit-total-value">
+        ${total.toLocaleString()}円
+    </div>
+    `;
 
     const list =
         document.getElementById(
@@ -138,22 +138,59 @@ function renderCardUsage() {
             );
 
         div.className =
-            "ranking-item";
+            "credit-card-item";
+
+        const payment =
+            getPayments().find(
+                function(p) {
+
+                    return (
+                        p.name ===
+                        card
+                    );
+
+                }
+            );
+
+        const ratio =
+            (
+                usageByCard[card]
+                /
+                total
+                *
+                100
+            ).toFixed(1);
 
         div.innerHTML =
-            `
-            <span>
-                ${card}
-            </span>
+        `
+        <div class="credit-card-header">
 
-            <span>
-                ${
-                    usageByCard[
-                        card
-                    ].toLocaleString()
-                }円
-            </span>
-            `;
+            <div>
+
+                <div class="credit-card-name">
+                    ${card}
+                </div>
+
+                <div class="credit-card-amount">
+                    ${usageByCard[card].toLocaleString()}円
+                </div>
+
+            </div>
+
+            <div class="credit-card-info">
+
+                支払日 ${payment?.paymentDay || "-"}日
+
+                <br>
+
+                <span class="credit-card-percent">
+                    ${ratio}%
+                </span>
+
+            </div>
+
+        </div>
+        `;
 
         list.appendChild(
             div
@@ -258,14 +295,14 @@ function renderCardBilling() {
     );
 
     document.getElementById(
-        "cardUsageTotal"
+        "cardBillingTotal"
     ).innerHTML =
     `
-    <div>
-        合計利用額
+    <div class="credit-total-title">
+        合計請求額
     </div>
 
-    <div class="card-total">
+    <div class="credit-total-value">
         ${total.toLocaleString()}円
     </div>
     `;
@@ -287,41 +324,53 @@ function renderCardBilling() {
                 card
             ];
 
+        const ratio =
+            (
+                item.amount
+                /
+                total
+                *
+                100
+            ).toFixed(1);
+
         const div =
             document.createElement(
                 "div"
             );
 
         div.className =
-            "ranking-item";
+            "credit-card-item";
 
         div.innerHTML =
-            `
+        `
+        <div class="credit-card-header">
+
             <div>
 
-                <strong>
+                <div class="credit-card-name">
                     ${card}
-                </strong>
+                </div>
 
-                <br>
+                <div class="credit-card-amount">
+                    ${item.amount.toLocaleString()}円
+                </div>
 
-                ${item.amount.toLocaleString()}円
+            </div>
+
+            <div class="credit-card-info">
+
+                支払日 ${item.paymentDay}日
+
+                 <br>
+
+                <span class="credit-card-percent">
+                    ${ratio}%
+                </span>
 
             </div>
 
-            <div>
-
-                ${Number(
-                    cardAnalysisMonth
-                        .substring(5, 7)
-                )}
-                /
-                ${item.paymentDay}
-
-                引落
-
-            </div>
-            `;
+        </div>
+        `;
 
         list.appendChild(
             div

@@ -33,6 +33,11 @@ function showAnalysisPage(
         "none";
 
     document.getElementById(
+        "fixedAnalysisPage"
+    ).style.display =
+        "none";
+
+    document.getElementById(
         pageId
     ).style.display =
         "block";

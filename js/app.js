@@ -36,7 +36,6 @@ renderPayments();
 generateFixedExpenses();
 renderExpenses();
 renderMonthSelector();
-renderCreditCardList();
 renderCategoryChart();
 updateCalendarTitle();
 renderCalendar();
@@ -54,3 +53,9 @@ renderHistoryFilters();
 renderFixedExpensePayments();
 renderFixedExpenseList();
 initializeFixedAnalysis();
+renderCategoryList();
+renderPaymentList();
+
+setActiveBottomTab(
+    "inputTab"
+);
