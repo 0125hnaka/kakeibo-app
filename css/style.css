@@ -1320,3 +1320,32 @@ label {
     color: white !important;
 
 }
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 12px;
+        padding-bottom: 90px;
+    }
+
+    .category-type-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .payment-type-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    #bottomNav {
+        height: 60px;
+    }
+
+    #bottomNav button {
+        height: 40px;
+    }
+
+}
