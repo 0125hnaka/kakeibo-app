@@ -1,3 +1,8 @@
+html,
+body{
+    overflow-x:hidden;
+}
+
 body {
 
     margin: 0;
@@ -1370,11 +1375,6 @@ label {
         gap: 12px;
     }
 
-    .payment-type-group label,
-    .category-type-group label {
-        width: 100%;
-    }
-
     /* 分析タブ */
     .analysis-tabs {
         gap: 6px;
@@ -1404,8 +1404,18 @@ label {
         font-size: 15px;
     }
 
-}
+    .category-type-group label,
+    .payment-type-group label{
 
-* {
-    outline: 1px solid red;
+        display:flex;
+        align-items:center;
+        justify-content:flex-start;
+
+        width:auto;
+        gap:10px;
+
+        margin-right:0;
+    }
+
+
 }
