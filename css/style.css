@@ -1405,3 +1405,7 @@ label {
     }
 
 }
+
+* {
+    outline: 1px solid red;
+}
