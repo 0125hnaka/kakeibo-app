@@ -1321,6 +1321,9 @@ label {
 
 }
 
+/* =========================
+   iPhone対応
+========================= */
 @media (max-width: 768px) {
 
     body {
@@ -1328,24 +1331,77 @@ label {
         padding-bottom: 90px;
     }
 
+    h1 {
+        font-size: 32px;
+        padding: 24px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    .balance-amount {
+        font-size: 48px;
+    }
+
+    .input-card,
+    .balance-card,
+    .setting-group,
+    .fixed-expense-form,
+    .summary-card,
+    .summary-wide-card,
+    .credit-card-item,
+    .credit-total-card {
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    /* カテゴリ選択 */
     .category-type-group {
         flex-direction: column;
         align-items: flex-start;
-        gap: 15px;
+        gap: 12px;
     }
 
+    /* 支払方法選択 */
     .payment-type-group {
         flex-direction: column;
         align-items: flex-start;
-        gap: 15px;
+        gap: 12px;
     }
 
+    .payment-type-group label,
+    .category-type-group label {
+        width: 100%;
+    }
+
+    /* 分析タブ */
+    .analysis-tabs {
+        gap: 6px;
+    }
+
+    .analysis-tab {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    /* サマリー3枚 */
+    .summary-cards {
+        flex-direction: column;
+    }
+
+    /* 下部ナビ */
     #bottomNav {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
         height: 60px;
     }
 
     #bottomNav button {
+        width: 60px;
         height: 40px;
+        font-size: 15px;
     }
 
 }
