@@ -1417,5 +1417,26 @@ label {
         margin-right:0;
     }
 
+    .payment-type-group label {
+        display:flex !important;
+        flex-direction:row !important;
+        align-items:center !important;
 
+        width:100% !important;
+
+        gap:12px !important;
+    }
+
+    .payment-type-group input[type="radio"]{
+        width:auto !important;
+        flex-shrink:0;
+    }
+
+    .summary-wide-card-title{
+        font-size:16px;
+    }
+
+    .summary-wide-card-value{
+        font-size:28px;
+    }
 }
