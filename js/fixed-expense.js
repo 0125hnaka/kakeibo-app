@@ -1,6 +1,141 @@
 let editingFixedExpenseId =
     null;
 
+function syncFixedExpenseCategories() {
+
+    const fixedExpenseMap =
+        new Map(
+            getFixedExpenses().map(
+                function(item) {
+
+                    return [
+                        String(item.id),
+                        item
+                    ];
+
+                }
+            )
+        );
+
+    const expenses =
+        getExpenses();
+
+    let changed = false;
+
+    expenses.forEach(
+        function(expense) {
+
+            if (
+                expense.fixedExpenseId === undefined ||
+                expense.fixedExpenseId === null
+            ) {
+                return;
+            }
+
+            const fixedExpense =
+                fixedExpenseMap.get(
+                    String(
+                        expense.fixedExpenseId
+                    )
+                );
+
+            if (!fixedExpense) {
+                return;
+            }
+
+            if (
+                expense.category !==
+                fixedExpense.category
+            ) {
+
+                expense.category =
+                    fixedExpense.category;
+
+                changed = true;
+
+            }
+
+        }
+    );
+
+    if (changed) {
+
+        saveExpenses(expenses);
+
+    }
+
+    return changed;
+
+}
+
+function validateFixedExpenseInput(
+    name,
+    amount,
+    day,
+    category,
+    payment
+) {
+
+    if (
+        name.trim() === ""
+    ) {
+
+        alert(
+            "固定費名を入力してください"
+        );
+
+        return false;
+
+    }
+
+    if (
+        !Number.isFinite(
+            amount
+        ) ||
+        amount <= 0
+    ) {
+
+        alert(
+            "固定費金額は1以上で入力してください"
+        );
+
+        return false;
+
+    }
+
+    if (
+        !Number.isInteger(
+            day
+        ) ||
+        day < 1 ||
+        day > 31
+    ) {
+
+        alert(
+            "支払日は1〜31で入力してください"
+        );
+
+        return false;
+
+    }
+
+    if (
+        !category ||
+        !payment
+    ) {
+
+        alert(
+            "カテゴリと支払方法を選択してください"
+        );
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
 function renderFixedExpensePayments() {
 
     const select =
@@ -38,6 +173,48 @@ function renderFixedExpensePayments() {
 
 }
 
+function renderFixedExpenseCategories() {
+
+    const select =
+        document.getElementById(
+            "fixedExpenseCategory"
+        );
+
+    if (!select) {
+        return;
+    }
+
+    select.innerHTML = "";
+
+    getCategories()
+    .filter(
+        category =>
+        category.type ===
+        "expense"
+    )
+    .forEach(
+        function(category) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                category.name;
+
+            option.textContent =
+                category.name;
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
 function renderEditFixedPayments() {
 
     const select =
@@ -64,6 +241,48 @@ function renderEditFixedPayments() {
 
             option.textContent =
                 payment.name;
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+function renderEditFixedCategories() {
+
+    const select =
+        document.getElementById(
+            "editFixedCategory"
+        );
+
+    if (!select) {
+        return;
+    }
+
+    select.innerHTML = "";
+
+    getCategories()
+    .filter(
+        category =>
+        category.type ===
+        "expense"
+    )
+    .forEach(
+        function(category) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                category.name;
+
+            option.textContent =
+                category.name;
 
             select.appendChild(
                 option
@@ -125,6 +344,12 @@ function renderFixedExpenseList() {
                 毎月${item.day}日
 
             </div>
+            
+            <div class="fixed-category">
+
+                ${item.category}
+
+            </div>
 
             <div class="button-row">
 
@@ -168,37 +393,64 @@ document.getElementById(
     "click",
     function() {
 
+        const name =
+            document.getElementById(
+                "fixedExpenseName"
+            ).value;
+
+        const amount =
+            Number(
+                document.getElementById(
+                    "fixedExpenseAmount"
+                ).value
+            );
+
+        const day =
+            Number(
+                document.getElementById(
+                    "fixedExpenseDay"
+                ).value
+            );
+
+        const category =
+            document.getElementById(
+                "fixedExpenseCategory"
+            ).value;
+
+        const payment =
+            document.getElementById(
+                "fixedExpensePayment"
+            ).value;
+
+        const isValid =
+            validateFixedExpenseInput(
+                name,
+                amount,
+                day,
+                category,
+                payment
+            );
+
+        if (!isValid) {
+            return;
+        }
+
         const fixedExpenses =
             getFixedExpenses();
 
         fixedExpenses.push({
 
-            id:
-                Date.now(),
+            id: Date.now(),
 
-            name:
-                document.getElementById(
-                    "fixedExpenseName"
-                ).value,
+            name: name,
 
-            amount:
-                Number(
-                    document.getElementById(
-                        "fixedExpenseAmount"
-                    ).value
-                ),
+            amount: amount,
 
-            day:
-                Number(
-                    document.getElementById(
-                        "fixedExpenseDay"
-                    ).value
-                ),
+            day: day,
 
-            payment:
-                document.getElementById(
-                    "fixedExpensePayment"
-                ).value
+            category: category,
+
+            payment: payment
 
         });
 
@@ -207,6 +459,18 @@ document.getElementById(
         );
 
         renderFixedExpenseList();
+
+        document.getElementById(
+            "fixedExpenseName"
+        ).value = "";
+
+        document.getElementById(
+            "fixedExpenseAmount"
+        ).value = "";
+
+        document.getElementById(
+            "fixedExpenseDay"
+        ).value = "";
 
     }
 );
@@ -275,6 +539,13 @@ function openFixedExpenseEdit(
 
     renderEditFixedPayments();
 
+    renderEditFixedCategories();
+
+    document.getElementById(
+        "editFixedCategory"
+    ).value =
+        item.category;
+
     document.getElementById(
         "editFixedPayment"
     ).value =
@@ -321,35 +592,80 @@ document.getElementById(
             return;
         }
 
-        item.name =
+        const name =
             document.getElementById(
                 "editFixedName"
             ).value;
 
-        item.amount =
+        const amount =
             Number(
                 document.getElementById(
                     "editFixedAmount"
                 ).value
             );
 
-        item.day =
+        const day =
             Number(
                 document.getElementById(
                     "editFixedDay"
                 ).value
             );
 
-        item.payment =
+        const category =
+            document.getElementById(
+                "editFixedCategory"
+            ).value;
+
+        const payment =
             document.getElementById(
                 "editFixedPayment"
             ).value;
+
+        const isValid =
+            validateFixedExpenseInput(
+                name,
+                amount,
+                day,
+                category,
+                payment
+            );
+
+        if (!isValid) {
+            return;
+        }
+
+        item.name =
+            name;
+
+        item.amount =
+            amount;
+
+        item.day =
+            day;
+
+        item.category =
+            category;
+
+        item.payment =
+            payment;
 
         saveFixedExpenses(
             fixedExpenses
         );
 
+        const synced =
+            syncFixedExpenseCategories();
+
         renderFixedExpenseList();
+
+        if (synced) {
+
+            renderExpenses();
+            renderCategoryChart();
+            renderExpenseAnalysis();
+            renderSummaryCards();
+
+        }
 
         document.getElementById(
             "fixedExpenseEditModal"

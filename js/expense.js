@@ -1,9 +1,79 @@
 let editingExpenseId =
     null;
 
+let lastDeletedExpense =
+    null;
+
+let expenseUndoTimerId =
+    null;
+
+function getBalanceDeltaByExpense(
+    expense
+) {
+
+    const amount =
+        Number(expense.amount) || 0;
+
+    const depositCategories =
+        [
+            "給料",
+            "賞与",
+            "給与",
+            "ボーナス",
+            "口座入金"
+        ];
+
+    if (
+        depositCategories.includes(
+            expense.category
+        )
+    ) {
+
+        return amount;
+
+    }
+
+    if (
+        expense.category ===
+        "口座出金"
+    ) {
+
+        return -amount;
+
+    }
+
+    return 0;
+
+}
+
+function escapeHtml(text) {
+
+    return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+
+}
+
 function renderExpenses() {
 
     const expenses = getExpenses();
+
+    const fixedExpenseMap =
+        new Map(
+            getFixedExpenses().map(
+                function(item) {
+
+                    return [
+                        String(item.id),
+                        item.name
+                    ];
+
+                }
+            )
+        );
 
     const expenseList =
         document.getElementById("expenseList");
@@ -102,12 +172,53 @@ function renderExpenses() {
         item.className =
             "expense-card";
 
+        let memoText =
+            expense.memo || "";
+
+        if (
+            memoText === "" &&
+            expense.fixedExpenseId !== undefined &&
+            expense.fixedExpenseId !== null
+        ) {
+
+            const fixedName =
+                fixedExpenseMap.get(
+                    String(
+                        expense.fixedExpenseId
+                    )
+                );
+
+            if (fixedName) {
+                memoText = fixedName;
+            }
+
+        }
+
+        const safeCategory =
+            escapeHtml(
+                expense.category
+            );
+
+        const safePayment =
+            escapeHtml(
+                expense.payment
+            );
+
+        const safeMemoText =
+            escapeHtml(
+                memoText
+            );
+
         item.innerHTML =
             `
             <div class="expense-row1">
 
                 <span class="expense-category">
-                    ${expense.category}
+                    ${safeCategory}
+
+                    <span class="expense-payment-inline">
+                        (${safePayment})
+                    </span>
                 </span>
 
                 <span class="expense-amount">
@@ -116,25 +227,21 @@ function renderExpenses() {
 
             </div>
 
-            <div class="expense-row2">
+            ${
+                memoText
+                ?
+                `
+                <div class="expense-row2">
 
-                <span>
-                    ${expense.memo || ""}
-                </span>
+                    <span>
+                        ${safeMemoText}
+                    </span>
 
-            </div>
-
-            <div class="expense-row2">
-
-                <span>
-                    ${expense.date}
-                </span>
-
-                <span>
-                    ${expense.payment}
-                </span>
-
-            </div>
+                </div>
+                `
+                :
+                ""
+            }
             `;
 
         const deleteButton =
@@ -203,6 +310,138 @@ function renderExpenses() {
 
 }
 
+function clearExpenseUndoNotice() {
+
+    const undoArea =
+        document.getElementById(
+            "expenseUndoArea"
+        );
+
+    if (undoArea) {
+        undoArea.innerHTML = "";
+    }
+
+}
+
+function resetExpenseUndoState() {
+
+    lastDeletedExpense =
+        null;
+
+    if (
+        expenseUndoTimerId
+    ) {
+
+        clearTimeout(
+            expenseUndoTimerId
+        );
+
+        expenseUndoTimerId =
+            null;
+
+    }
+
+    clearExpenseUndoNotice();
+
+}
+
+function showExpenseUndoNotice(
+    deletedExpense
+) {
+
+    const undoArea =
+        document.getElementById(
+            "expenseUndoArea"
+        );
+
+    if (!undoArea) {
+        return;
+    }
+
+    lastDeletedExpense =
+        deletedExpense;
+
+    if (
+        expenseUndoTimerId
+    ) {
+
+        clearTimeout(
+            expenseUndoTimerId
+        );
+
+    }
+
+    undoArea.innerHTML =
+        `
+        <div class="expense-undo-bar">
+            <span>
+                履歴を削除しました
+            </span>
+
+            <button
+                type="button"
+                id="undoDeleteExpenseButton"
+            >
+                元に戻す
+            </button>
+        </div>
+        `;
+
+    document.getElementById(
+        "undoDeleteExpenseButton"
+    ).addEventListener(
+        "click",
+        function() {
+
+            if (
+                !lastDeletedExpense
+            ) {
+                return;
+            }
+
+            const expenses =
+                getExpenses();
+
+            expenses.push(
+                lastDeletedExpense
+            );
+
+            saveExpenses(expenses);
+
+            let balance =
+                getBalance();
+
+            balance +=
+                getBalanceDeltaByExpense(
+                    lastDeletedExpense
+                );
+
+            saveBalance(balance);
+
+            renderExpenses();
+            renderMonthSelector();
+            refreshBalanceViews();
+            renderCalendar();
+            renderCardUsage();
+            renderCardBilling();
+
+            resetExpenseUndoState();
+
+        }
+    );
+
+    expenseUndoTimerId =
+        setTimeout(
+            function() {
+
+                resetExpenseUndoState();
+
+            },
+            10000
+        );
+
+}
+
 const saveButton =
     document.getElementById("saveButton");
 
@@ -262,33 +501,21 @@ saveButton.addEventListener(
         let balance =
             getBalance();
 
-        if (
-            category === "給与" ||
-            category === "ボーナス" ||
-            category === "口座入金"
-        ) {
-
-            balance += Number(amount);
-
-        }
-
-        if (
-            category === "口座出金"
-        ) {
-
-            balance -= Number(amount);
-
-        }
+        balance +=
+            getBalanceDeltaByExpense(
+                expense
+            );
 
         saveBalance(balance);
 
         saveExpenses(expenses);
 
+        resetExpenseUndoState();
+
         renderExpenses();
 
         renderMonthSelector();
-        renderPaymentSummary();
-        renderBalance();
+        refreshBalanceViews();
         renderCalendar();
         renderCardUsage();
         renderCardBilling();
@@ -320,6 +547,22 @@ function deleteExpense(
     let expenses =
         getExpenses();
 
+    const deletedExpense =
+        expenses.find(
+            function(expense) {
+
+                return (
+                    expense.id ===
+                    expenseId
+                );
+
+            }
+        );
+
+    if (!deletedExpense) {
+        return;
+    }
+
     expenses =
         expenses.filter(
             function(expense) {
@@ -332,14 +575,29 @@ function deleteExpense(
             }
         );
 
+        let balance =
+            getBalance();
+
+        balance -=
+            getBalanceDeltaByExpense(
+                deletedExpense
+            );
+
+        saveBalance(balance);
+
         saveExpenses(expenses);
 
         renderExpenses();
 
         renderMonthSelector();
-        renderPaymentSummary();
-        recalculateBalance();
+        refreshBalanceViews();
         renderCalendar();
+        renderCardUsage();
+        renderCardBilling();
+
+        showExpenseUndoNotice(
+            deletedExpense
+        );
 
 }
 
@@ -498,6 +756,11 @@ document.getElementById(
             return;
         }
 
+        const oldDelta =
+            getBalanceDeltaByExpense(
+                expense
+            );
+
         expense.amount =
             Number(
                 document.getElementById(
@@ -530,29 +793,36 @@ document.getElementById(
                 "editMemo"
             ).value;
 
+        const newDelta =
+            getBalanceDeltaByExpense(
+                expense
+            );
+
+        let balance =
+            getBalance();
+
+        balance +=
+            newDelta - oldDelta;
+
+        saveBalance(balance);
+
         saveExpenses(
             expenses
         );
 
-        recalculateBalance();
+        resetExpenseUndoState();
 
         renderExpenses();
 
         renderMonthSelector();
 
-        renderPaymentSummary();
-
-        renderIncomeRanking();
-
         renderIncomeSummary();
-
-        renderExpensePaymentSummary();
 
         renderCardUsage();
 
         renderCardBilling();
 
-        renderAssetAnalysis();
+    refreshBalanceViews();
 
         updateCalendarTitle();
 

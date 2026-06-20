@@ -116,6 +116,22 @@ addPaymentButton.addEventListener(
             paymentType === "credit"
         ) {
 
+            if (
+                !Number.isInteger(
+                    paymentDay
+                ) ||
+                paymentDay < 1 ||
+                paymentDay > 31
+            ) {
+
+                alert(
+                    "クレジットカードの支払日は1〜31で入力してください"
+                );
+
+                return;
+
+            }
+
             paymentObject.paymentDay =
                 paymentDay;
 
@@ -141,77 +157,12 @@ addPaymentButton.addEventListener(
             "newPayment"
         ).value = "";
 
+        document.getElementById(
+            "paymentDay"
+        ).value = "";
+
     }
 );
-
-function renderPaymentList() {
-
-    const container =
-        document.getElementById(
-            "paymentList"
-        );
-
-    container.innerHTML =
-        `
-        <div class="setting-group">
-
-            <div
-                class="setting-group-title"
-            >
-                支払方法一覧
-            </div>
-
-            <div
-                id="paymentListArea"
-            >
-            </div>
-
-        </div>
-        `;
-
-    const area =
-        document.getElementById(
-            "paymentListArea"
-        );
-
-    getPayments()
-    .forEach(
-        function(payment) {
-
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-            div.className =
-                "setting-item";
-
-            div.innerHTML =
-                `
-                <span>
-                    ${payment.name}
-                </span>
-
-                <button
-                    class="delete-btn"
-                    onclick="
-                        deletePayment(
-                            '${payment.name}'
-                        )
-                    "
-                >
-                    削除
-                </button>
-                `;
-
-            area.appendChild(
-                div
-            );
-
-        }
-    );
-
-}
 
 function renderPaymentList() {
 

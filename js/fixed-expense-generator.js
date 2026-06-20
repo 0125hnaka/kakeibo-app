@@ -74,17 +74,20 @@ function generateFixedExpenses() {
                 type:
                     "expense",
 
-                amount:
+                    amount:
                     item.amount,
 
                 date:
                     date,
 
                 category:
-                    "サブスク",
+                    item.category,
 
                 payment:
-                    item.payment
+                    item.payment,
+
+                memo:
+                    `固定費:${item.name}`
 
             });
 

@@ -1,9 +1,3 @@
-console.log(
-    document.getElementById(
-        "inputTab"
-    )
-);
-
 function showPage(
     pageId
 ) {
@@ -35,11 +29,25 @@ function showPage(
 
 }
 
+function syncBalanceWithBilling() {
+
+    processCreditCardBills();
+
+    renderBalance();
+
+    renderSummaryCards();
+
+    renderAssetAnalysis();
+
+}
+
 document.getElementById(
     "inputTab"
 ).addEventListener(
     "click",
     function() {
+
+        syncBalanceWithBilling();
 
         showPage(
             "inputPage"
@@ -58,6 +66,8 @@ document.getElementById(
     "click",
     function() {
 
+        syncBalanceWithBilling();
+
         showPage(
             "historyPage"
         );
@@ -74,6 +84,8 @@ document.getElementById(
 ).addEventListener(
     "click",
     function() {
+
+        syncBalanceWithBilling();
 
         showPage(
             "analysisPage"
@@ -93,6 +105,8 @@ document.getElementById(
 ).addEventListener(
     "click",
     function() {
+
+        syncBalanceWithBilling();
 
         showPage(
             "settingsPage"

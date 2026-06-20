@@ -1,5 +1,3 @@
-console.log("家計簿アプリ起動");
-
 const today = new Date()
     .toISOString()
     .split("T")[0];
@@ -34,6 +32,7 @@ renderBalance();
 renderCategories();
 renderPayments();
 generateFixedExpenses();
+syncFixedExpenseCategories();
 renderExpenses();
 renderMonthSelector();
 renderCategoryChart();
@@ -42,9 +41,7 @@ renderCalendar();
 renderSummaryCards();
 initializeExpenseAnalysis();
 renderExpenseAnalysis();
-renderExpensePaymentSummary();
 initializeIncomeAnalysis();
-renderIncomeRanking();
 renderIncomeSummary();
 renderIncomeChart();
 initializeCardAnalysis();
@@ -52,6 +49,7 @@ renderAssetAnalysis();
 renderHistoryFilters();
 renderFixedExpensePayments();
 renderFixedExpenseList();
+renderFixedExpenseCategories();
 initializeFixedAnalysis();
 renderCategoryList();
 renderPaymentList();

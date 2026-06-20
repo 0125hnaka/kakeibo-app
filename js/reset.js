@@ -3,6 +3,16 @@ const resetButton =
         "resetButton"
     );
 
+const appStorageKeys = [
+    "expenses",
+    "categories",
+    "payments",
+    "fixedExpenses",
+    "paidBills",
+    "baseBalance",
+    "balance"
+];
+
 resetButton.addEventListener(
     "click",
     function() {
@@ -16,7 +26,15 @@ resetButton.addEventListener(
             return;
         }
 
-        localStorage.clear();
+        appStorageKeys.forEach(
+            function(key) {
+
+                localStorage.removeItem(
+                    key
+                );
+
+            }
+        );
 
         location.reload();
 

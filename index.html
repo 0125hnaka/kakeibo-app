@@ -183,6 +183,11 @@
 
         </div>
 
+        <div
+            id="expenseUndoArea"
+        >
+        </div>
+
         <div id="expenseList">
     </div>
 
@@ -726,6 +731,9 @@
             type="number"
             id="paymentDay"
             placeholder="支払日"
+            min="1"
+            max="31"
+            step="1"
         >
 
         <br><br>
@@ -768,6 +776,8 @@
                 type="number"
                 id="fixedExpenseAmount"
                 placeholder="金額"
+                min="1"
+                step="1"
             >
 
             <br><br>
@@ -776,18 +786,26 @@
                 type="number"
                 id="fixedExpenseDay"
                 placeholder="支払日"
+                min="1"
+                max="31"
+                step="1"
             >
 
             <br><br>
 
+            <select
+                id="fixedExpenseCategory"
+            >
+            </select>
+
+            <br><br>
+
+            <select
+                id="fixedExpensePayment"
+            >
+            </select>
+
         </div>
-
-        <select
-            id="fixedExpensePayment"
-        >
-        </select>
-
-        <br><br>
 
         <button
             type="button"
@@ -822,6 +840,8 @@
                 type="number"
                 id="editFixedAmount"
                 placeholder="金額"
+                min="1"
+                step="1"
             >
 
             <br><br>
@@ -830,9 +850,17 @@
                 type="number"
                 id="editFixedDay"
                 placeholder="支払日"
+                min="1"
+                max="31"
+                step="1"
             >
 
             <br><br>
+            
+            <select
+                id="editFixedCategory"
+            >
+            </select>
 
             <select
                 id="editFixedPayment"
@@ -875,8 +903,10 @@
             </div>
 
             <input
+                type="number"
                 id="balanceInput"
                 placeholder="残高入力"
+                step="1"
             >
 
             <br><br>
@@ -887,8 +917,16 @@
                 残高保存
             </button>
 
+            <button
+                type="button"
+                id="recalculateBalanceButton"
+            >
+                残高再計算
+            </button>
+
         </div>
 
+        <h3 class="fixed-expense-title">
         <hr>
 
         <h2>データ管理</h2>

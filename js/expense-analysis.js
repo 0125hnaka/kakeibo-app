@@ -46,10 +46,6 @@ function updateExpenseMonthTitle() {
 
 function renderExpenseAnalysis() {
 
-    console.log(
-        "renderExpenseAnalysis"
-    );
-
     const expenses =
         getExpenses();
 
@@ -177,9 +173,11 @@ function renderExpenseAnalysis() {
 
                 <div>
 
-                    ${percent.toFixed(
-                        1
-                    )}%
+                    <span class="credit-card-percent">
+                        ${percent.toFixed(
+                            1
+                        )}%
+                    </span>
 
                 </div>
                 `;
@@ -190,103 +188,6 @@ function renderExpenseAnalysis() {
 
         }
     );
-
-}
-
-function renderExpensePaymentSummary() {
-
-    const expenses =
-        getExpenses();
-
-    const selectedMonth =
-        expenseAnalysisMonth;
-
-    const summary = {};
-
-    expenses.forEach(
-        function(expense) {
-
-            if (
-                expense.type !==
-                "expense"
-            ) {
-
-                return;
-
-            }
-
-            if (
-                expense.date.substring(
-                    0,
-                    7
-                ) !== selectedMonth
-            ) {
-
-                return;
-
-            }
-
-            if (
-                !summary[
-                    expense.payment
-                ]
-            ) {
-
-                summary[
-                    expense.payment
-                ] = 0;
-
-            }
-
-            summary[
-                expense.payment
-            ] += expense.amount;
-
-        }
-    );
-
-    const container =
-        document.getElementById(
-            "expensePaymentSummary"
-        );
-
-    if (!container) {
-        return;
-    }
-
-    container.innerHTML = "";
-
-    for (
-        const payment
-        in summary
-    ) {
-
-        const div =
-            document.createElement(
-                "div"
-            );
-
-        div.className =
-            "ranking-item";
-
-        div.innerHTML =
-            `
-            <span>
-                ${payment}
-            </span>
-
-            <span>
-                ${summary[
-                    payment
-                ].toLocaleString()}円
-            </span>
-            `;
-
-        container.appendChild(
-            div
-        );
-
-    }
 
 }
 

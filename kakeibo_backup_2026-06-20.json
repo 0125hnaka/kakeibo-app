@@ -1,0 +1,1229 @@
+{
+  "expenses": [
+    {
+      "id": 1781348666882,
+      "type": "expense",
+      "amount": 1500,
+      "date": "2026-05-01",
+      "category": "サブスク",
+      "payment": "AmazonPrimeカード",
+      "memo": "iCloud"
+    },
+    {
+      "id": 1781348686904,
+      "type": "expense",
+      "amount": 3000,
+      "date": "2026-05-01",
+      "category": "サブスク",
+      "payment": "AmazonPrimeカード",
+      "memo": "ChatGPT"
+    },
+    {
+      "id": 1781348709100,
+      "type": "expense",
+      "amount": 780,
+      "date": "2026-05-01",
+      "category": "サブスク",
+      "payment": "AmazonPrimeカード",
+      "memo": "Youtube Premium "
+    },
+    {
+      "id": 1781348723744,
+      "type": "expense",
+      "amount": 890,
+      "date": "2026-05-01",
+      "category": "サブスク",
+      "payment": "AmazonPrimeカード",
+      "memo": "NetFlix"
+    },
+    {
+      "id": 1781348740237,
+      "type": "expense",
+      "amount": 3780,
+      "date": "2026-05-01",
+      "category": "外食費",
+      "payment": "AmazonPrimeカード",
+      "memo": "さわやか"
+    },
+    {
+      "id": 1781348800201,
+      "type": "expense",
+      "amount": 1000,
+      "date": "2026-05-04",
+      "category": "交通費",
+      "payment": "AmazonPrimeカード",
+      "memo": "Suicaチャージ"
+    },
+    {
+      "id": 1781348836495,
+      "type": "expense",
+      "amount": 700,
+      "date": "2026-05-02",
+      "category": "外食費",
+      "payment": "AmazonPrimeカード",
+      "memo": "バーキン"
+    },
+    {
+      "id": 1781348846847,
+      "type": "expense",
+      "amount": 5000,
+      "date": "2026-05-02",
+      "category": "返却",
+      "payment": "現金",
+      "memo": "今野への返却"
+    },
+    {
+      "id": 1781348885937,
+      "type": "expense",
+      "amount": 880,
+      "date": "2026-05-03",
+      "category": "趣味",
+      "payment": "AmazonPrimeカード",
+      "memo": "漫画"
+    },
+    {
+      "id": 1781348956509,
+      "type": "expense",
+      "amount": 16053,
+      "date": "2026-05-04",
+      "category": "デート",
+      "payment": "AmazonPrimeカード",
+      "memo": "ホテル代"
+    },
+    {
+      "id": 1781349003802,
+      "type": "expense",
+      "amount": 1042,
+      "date": "2026-05-04",
+      "category": "デート",
+      "payment": "現金",
+      "memo": "ゴム"
+    },
+    {
+      "id": 1781349114681,
+      "type": "expense",
+      "amount": 2500,
+      "date": "2026-05-04",
+      "category": "デート",
+      "payment": "AmazonPrimeカード",
+      "memo": "スープストック"
+    },
+    {
+      "id": 1781349129156,
+      "type": "expense",
+      "amount": 1813,
+      "date": "2026-05-04",
+      "category": "デート",
+      "payment": "AmazonPrimeカード",
+      "memo": "イトーヨーカドー"
+    },
+    {
+      "id": 1781349157130,
+      "type": "expense",
+      "amount": 1400,
+      "date": "2026-05-05",
+      "category": "その他",
+      "payment": "AmazonPrimeカード",
+      "memo": "いっさ誕プレ"
+    },
+    {
+      "id": 1781349202777,
+      "type": "expense",
+      "amount": 220,
+      "date": "2026-05-05",
+      "category": "デート",
+      "payment": "PayPay",
+      "memo": "いも恋"
+    },
+    {
+      "id": 1781349217906,
+      "type": "expense",
+      "amount": 320,
+      "date": "2026-05-05",
+      "category": "デート",
+      "payment": "現金",
+      "memo": "団子"
+    },
+    {
+      "id": 1781349321389,
+      "type": "expense",
+      "amount": 450,
+      "date": "2026-05-05",
+      "category": "デート",
+      "payment": "現金",
+      "memo": ""
+    },
+    {
+      "id": 1781349337553,
+      "type": "expense",
+      "amount": 600,
+      "date": "2026-05-05",
+      "category": "デート",
+      "payment": "現金",
+      "memo": "ソーセージ"
+    },
+    {
+      "id": 1781349358746,
+      "type": "expense",
+      "amount": 600,
+      "date": "2026-05-05",
+      "category": "デート",
+      "payment": "現金",
+      "memo": "おにぎり"
+    },
+    {
+      "id": 1781349438472,
+      "type": "expense",
+      "amount": 700,
+      "date": "2026-05-05",
+      "category": "デート",
+      "payment": "AmazonPrimeカード",
+      "memo": "ほなポテトとアイス"
+    },
+    {
+      "id": 1781349479974,
+      "type": "expense",
+      "amount": 621,
+      "date": "2026-05-04",
+      "category": "その他",
+      "payment": "AmazonPrimeカード",
+      "memo": "バンク光ルータ返却"
+    },
+    {
+      "id": 1781349573367,
+      "type": "expense",
+      "amount": 2810,
+      "date": "2026-05-05",
+      "category": "デート",
+      "payment": "AmazonPrimeカード",
+      "memo": "阿夫利"
+    },
+    {
+      "id": 1781349585647,
+      "type": "expense",
+      "amount": 950,
+      "date": "2026-05-05",
+      "category": "デート",
+      "payment": "AmazonPrimeカード",
+      "memo": "タリーズ"
+    },
+    {
+      "id": 1781349597762,
+      "type": "income",
+      "amount": 10000,
+      "date": "2026-05-05",
+      "category": "返却",
+      "payment": "現金",
+      "memo": "ほなから"
+    },
+    {
+      "id": 1781349623408,
+      "type": "expense",
+      "amount": 440,
+      "date": "2026-05-05",
+      "category": "サブスク",
+      "payment": "AmazonPrimeカード",
+      "memo": "髭男"
+    },
+    {
+      "id": 1781349679755,
+      "type": "expense",
+      "amount": 1980,
+      "date": "2026-05-06",
+      "category": "日用品",
+      "payment": "AmazonPrimeカード",
+      "memo": "水"
+    },
+    {
+      "id": 1781349694781,
+      "type": "income",
+      "amount": 2000,
+      "date": "2026-05-06",
+      "category": "返却",
+      "payment": "現金",
+      "memo": "水"
+    },
+    {
+      "id": 1781349716351,
+      "type": "income",
+      "amount": 3000,
+      "date": "2026-05-06",
+      "category": "返却",
+      "payment": "現金",
+      "memo": "杉養蜂園"
+    },
+    {
+      "id": 1781349743061,
+      "type": "expense",
+      "amount": 1000,
+      "date": "2026-05-06",
+      "category": "交通費",
+      "payment": "AmazonPrimeカード",
+      "memo": "PASMOチャージ"
+    },
+    {
+      "id": 1781349769205,
+      "type": "expense",
+      "amount": 2592,
+      "date": "2026-05-06",
+      "category": "その他",
+      "payment": "AmazonPrimeカード",
+      "memo": "杉養蜂園"
+    },
+    {
+      "id": 1781349831385,
+      "type": "expense",
+      "amount": 9240,
+      "date": "2026-05-08",
+      "category": "外食費",
+      "payment": "AmazonPrimeカード",
+      "memo": "インターン飲み"
+    },
+    {
+      "id": 1781349849291,
+      "type": "income",
+      "amount": 50000,
+      "date": "2026-05-09",
+      "category": "その他",
+      "payment": "現金",
+      "memo": "ばあじいから"
+    },
+    {
+      "id": 1781350048103,
+      "type": "expense",
+      "amount": 190,
+      "date": "2026-05-06",
+      "category": "外食費",
+      "payment": "AmazonPrimeカード",
+      "memo": "いちごジャムサンド"
+    },
+    {
+      "id": 1781350119540,
+      "type": "expense",
+      "amount": 1700,
+      "date": "2026-05-10",
+      "category": "その他",
+      "payment": "現金",
+      "memo": "散髪"
+    },
+    {
+      "id": 1781350135949,
+      "type": "expense",
+      "amount": 1756,
+      "date": "2026-05-10",
+      "category": "外食費",
+      "payment": "AmazonPrimeカード",
+      "memo": "吉野家"
+    },
+    {
+      "id": 1781350147161,
+      "type": "income",
+      "amount": 2000,
+      "date": "2026-05-10",
+      "category": "返却",
+      "payment": "現金",
+      "memo": "吉野家"
+    },
+    {
+      "id": 1781350174217,
+      "type": "income",
+      "amount": 6000,
+      "date": "2026-05-10",
+      "category": "返却",
+      "payment": "現金",
+      "memo": "こうととものり"
+    },
+    {
+      "id": 1781350189494,
+      "type": "expense",
+      "amount": 1320,
+      "date": "2026-05-10",
+      "category": "外食費",
+      "payment": "AmazonPrimeカード",
+      "memo": "ラーメン"
+    },
+    {
+      "id": 1781350207152,
+      "type": "expense",
+      "amount": 3000,
+      "date": "2026-05-10",
+      "category": "交通費",
+      "payment": "AmazonPrimeカード",
+      "memo": "PASMOとSuicaチャージ（NL）"
+    },
+    {
+      "id": 1781350241569,
+      "type": "expense",
+      "amount": 329,
+      "date": "2026-05-13",
+      "category": "外食費",
+      "payment": "AmazonPrimeカード",
+      "memo": "グミ"
+    },
+    {
+      "id": 1781350319893,
+      "type": "expense",
+      "amount": 1000,
+      "date": "2026-05-14",
+      "category": "外食費",
+      "payment": "PayPayカード",
+      "memo": "飲み"
+    },
+    {
+      "id": 1781350417055,
+      "type": "expense",
+      "amount": 8685,
+      "date": "2026-05-14",
+      "category": "通信費",
+      "payment": "AmazonPrimeカード",
+      "memo": "ドコモ"
+    },
+    {
+      "id": 1781350451880,
+      "type": "expense",
+      "amount": 1380,
+      "date": "2026-05-15",
+      "category": "外食費",
+      "payment": "AmazonPrimeカード",
+      "memo": "さぼてん"
+    },
+    {
+      "id": 1781350547309,
+      "type": "expense",
+      "amount": 3400,
+      "date": "2026-05-14",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "サカモトデイズ"
+    },
+    {
+      "id": 1781350581167,
+      "type": "expense",
+      "amount": 80705,
+      "date": "2026-05-15",
+      "category": "病院",
+      "payment": "ゴールドNL",
+      "memo": "薬局"
+    },
+    {
+      "id": 1781350603313,
+      "type": "expense",
+      "amount": 2700,
+      "date": "2026-05-15",
+      "category": "病院",
+      "payment": "ゴールドNL",
+      "memo": "藤本皮膚科"
+    },
+    {
+      "id": 1781350669215,
+      "type": "expense",
+      "amount": 2467,
+      "date": "2026-05-16",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "麻辣担"
+    },
+    {
+      "id": 1781350685352,
+      "type": "expense",
+      "amount": 950,
+      "date": "2026-05-16",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "映画食べ物"
+    },
+    {
+      "id": 1781350704741,
+      "type": "expense",
+      "amount": 4860,
+      "date": "2026-05-16",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "自遊空間"
+    },
+    {
+      "id": 1781350720943,
+      "type": "expense",
+      "amount": 2220,
+      "date": "2026-05-16",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "大戸屋"
+    },
+    {
+      "id": 1781350749516,
+      "type": "income",
+      "amount": 5000,
+      "date": "2026-05-16",
+      "category": "返却",
+      "payment": "現金",
+      "memo": "ほなから"
+    },
+    {
+      "id": 1781350821116,
+      "type": "expense",
+      "amount": 2300,
+      "date": "2026-05-20",
+      "category": "外食費",
+      "payment": "PayPayカード",
+      "memo": "タイ料理"
+    },
+    {
+      "id": 1781350891679,
+      "type": "expense",
+      "amount": 338,
+      "date": "2026-05-21",
+      "category": "外食費",
+      "payment": "ゴールドNL",
+      "memo": "おかしのまちおか"
+    },
+    {
+      "id": 1781350907123,
+      "type": "expense",
+      "amount": 170,
+      "date": "2026-05-22",
+      "category": "外食費",
+      "payment": "ゴールドNL",
+      "memo": "くきわかめ"
+    },
+    {
+      "id": 1781350930988,
+      "type": "expense",
+      "amount": 396,
+      "date": "2026-05-23",
+      "category": "趣味",
+      "payment": "ゴールドNL",
+      "memo": "カラオケ"
+    },
+    {
+      "id": 1781350951292,
+      "type": "expense",
+      "amount": 66660,
+      "date": "2026-05-23",
+      "category": "その他",
+      "payment": "ゴールドNL",
+      "memo": "オーダーメイド枕"
+    },
+    {
+      "id": 1781350965732,
+      "type": "expense",
+      "amount": 4517,
+      "date": "2026-05-23",
+      "category": "外食費",
+      "payment": "ゴールドNL",
+      "memo": "くら寿司"
+    },
+    {
+      "id": 1781350991545,
+      "type": "expense",
+      "amount": 1000,
+      "date": "2026-05-23",
+      "category": "交通費",
+      "payment": "ゴールドNL",
+      "memo": "PASMOチャージ"
+    },
+    {
+      "id": 1781351018953,
+      "type": "expense",
+      "amount": 2000,
+      "date": "2026-05-23",
+      "category": "交通費",
+      "payment": "Viewカード",
+      "memo": "Suicaチャージ"
+    },
+    {
+      "id": 1781351039783,
+      "type": "expense",
+      "amount": 690,
+      "date": "2026-05-27",
+      "category": "外食費",
+      "payment": "ゴールドNL",
+      "memo": "松のや"
+    },
+    {
+      "id": 1781351048952,
+      "type": "income",
+      "amount": 79000,
+      "date": "2026-05-27",
+      "category": "返却",
+      "payment": "現金",
+      "memo": "薬代"
+    },
+    {
+      "id": 1781351064781,
+      "type": "income",
+      "amount": 223390,
+      "date": "2026-05-28",
+      "category": "給料",
+      "payment": "現金",
+      "memo": ""
+    },
+    {
+      "id": 1781351099129,
+      "type": "expense",
+      "amount": 210,
+      "date": "2026-05-25",
+      "category": "外食費",
+      "payment": "ゴールドNL",
+      "memo": "おかしのまちおか"
+    },
+    {
+      "id": 1781351117584,
+      "type": "expense",
+      "amount": 795,
+      "date": "2026-05-29",
+      "category": "外食費",
+      "payment": "ゴールドNL",
+      "memo": "おかしのまちおか"
+    },
+    {
+      "id": 1781351169209,
+      "type": "expense",
+      "amount": 11000,
+      "date": "2026-05-30",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "ペアリング"
+    },
+    {
+      "id": 1781351192670,
+      "type": "expense",
+      "amount": 1000,
+      "date": "2026-05-30",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "杉養蜂園"
+    },
+    {
+      "id": 1781351217643,
+      "type": "expense",
+      "amount": 900,
+      "date": "2026-05-30",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "ソーセージ"
+    },
+    {
+      "id": 1781351233339,
+      "type": "expense",
+      "amount": 1100,
+      "date": "2026-05-30",
+      "category": "デート",
+      "payment": "現金",
+      "memo": "メンチカツ"
+    },
+    {
+      "id": 1781351246529,
+      "type": "expense",
+      "amount": 500,
+      "date": "2026-05-30",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "芋けんぴ"
+    },
+    {
+      "id": 1781351265746,
+      "type": "expense",
+      "amount": 4500,
+      "date": "2026-05-30",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "自遊空間"
+    },
+    {
+      "id": 1781351306501,
+      "type": "expense",
+      "amount": 2232,
+      "date": "2026-05-30",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "ごちとん"
+    },
+    {
+      "id": 1781351355212,
+      "type": "expense",
+      "amount": 579,
+      "date": "2026-05-30",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "スタバ"
+    },
+    {
+      "id": 1781351365227,
+      "type": "expense",
+      "amount": 648,
+      "date": "2026-05-30",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "鎌倉"
+    },
+    {
+      "id": 1781351375341,
+      "type": "expense",
+      "amount": 5600,
+      "date": "2026-05-30",
+      "category": "その他",
+      "payment": "ゴールドNL",
+      "memo": "年会費"
+    },
+    {
+      "id": 1781351421781,
+      "type": "expense",
+      "amount": 20000,
+      "date": "2026-05-30",
+      "category": "投資",
+      "payment": "AmazonPrimeカード",
+      "memo": "NISA"
+    },
+    {
+      "id": 1781351513420,
+      "type": "expense",
+      "amount": 2500,
+      "date": "2026-05-14",
+      "category": "外食費",
+      "payment": "現金",
+      "memo": "飲み"
+    },
+    {
+      "id": 1781351558917,
+      "type": "expense",
+      "amount": 9424,
+      "date": "2026-05-01",
+      "category": "通信費",
+      "payment": "PayPayカード",
+      "memo": "ソフトバンクM"
+    },
+    {
+      "id": 1781352014679,
+      "type": "expense",
+      "amount": 1000,
+      "date": "2026-05-30",
+      "category": "交通費",
+      "payment": "ゴールドNL",
+      "memo": "PASMOチャージ"
+    },
+    {
+      "id": 1781352669943,
+      "type": "expense",
+      "amount": 780,
+      "date": "2026-05-31",
+      "category": "サブスク",
+      "payment": "AmazonPrimeカード",
+      "memo": "YouTube Premium "
+    },
+    {
+      "id": 1781352915242,
+      "type": "expense",
+      "amount": 1000,
+      "date": "2026-05-04",
+      "category": "交通費",
+      "payment": "AmazonPrimeカード",
+      "memo": "PASMOチャージ"
+    },
+    {
+      "id": 1781354211602,
+      "type": "expense",
+      "amount": 1000,
+      "date": "2026-05-02",
+      "category": "交通費",
+      "payment": "AmazonPrimeカード",
+      "memo": "Suicaチャージ"
+    },
+    {
+      "id": 1781354758832,
+      "type": "expense",
+      "amount": 4559,
+      "date": "2026-06-04",
+      "category": "日用品",
+      "payment": "AmazonPrimeカード",
+      "memo": "水、マスク、室外機カバーなど"
+    },
+    {
+      "id": 1781354798887,
+      "type": "expense",
+      "amount": 2950,
+      "date": "2026-06-03",
+      "category": "サブスク",
+      "payment": "AmazonPrimeカード",
+      "memo": "AmazonPrime年会費"
+    },
+    {
+      "id": 1781354919191,
+      "type": "expense",
+      "amount": 2052,
+      "date": "2026-06-05",
+      "category": "外食費",
+      "payment": "PayPayカード",
+      "memo": "飲み"
+    },
+    {
+      "id": 1781355019942,
+      "type": "expense",
+      "amount": 1200,
+      "date": "2026-06-05",
+      "category": "外食費",
+      "payment": "現金",
+      "memo": "飲み"
+    },
+    {
+      "id": 1781355375300,
+      "type": "expense",
+      "amount": 800,
+      "date": "2026-06-06",
+      "category": "デート",
+      "payment": "現金",
+      "memo": "メンチカツ"
+    },
+    {
+      "id": 1781355400176,
+      "type": "expense",
+      "amount": 2960,
+      "date": "2026-06-06",
+      "category": "デート",
+      "payment": "現金",
+      "memo": "焼ける団子"
+    },
+    {
+      "id": 1781355431545,
+      "type": "expense",
+      "amount": 1000,
+      "date": "2026-06-06",
+      "category": "交通費",
+      "payment": "Viewカード",
+      "memo": "Suicaチャージ"
+    },
+    {
+      "id": 1781355456942,
+      "type": "expense",
+      "amount": 3102,
+      "date": "2026-06-06",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "うさぎ2個"
+    },
+    {
+      "id": 1781355545379,
+      "type": "expense",
+      "amount": 970,
+      "date": "2026-06-06",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "ほな抹茶"
+    },
+    {
+      "id": 1781355561016,
+      "type": "expense",
+      "amount": 62,
+      "date": "2026-06-06",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "水"
+    },
+    {
+      "id": 1781355577208,
+      "type": "expense",
+      "amount": 530,
+      "date": "2026-06-06",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "団子"
+    },
+    {
+      "id": 1781355594580,
+      "type": "expense",
+      "amount": 1260,
+      "date": "2026-06-06",
+      "category": "デート",
+      "payment": "現金",
+      "memo": "うなな"
+    },
+    {
+      "id": 1781355617680,
+      "type": "expense",
+      "amount": 764,
+      "date": "2026-06-06",
+      "category": "食費",
+      "payment": "ゴールドNL",
+      "memo": "牛乳、そうめん"
+    },
+    {
+      "id": 1781355675191,
+      "type": "expense",
+      "amount": 1700,
+      "date": "2026-06-07",
+      "category": "その他",
+      "payment": "現金",
+      "memo": "散髪"
+    },
+    {
+      "id": 1781355711836,
+      "type": "expense",
+      "amount": 604,
+      "date": "2026-06-07",
+      "category": "趣味",
+      "payment": "ゴールドNL",
+      "memo": "カラオケ"
+    },
+    {
+      "id": 1781355744607,
+      "type": "expense",
+      "amount": 178,
+      "date": "2026-06-08",
+      "category": "外食費",
+      "payment": "ゴールドNL",
+      "memo": "ワッフル"
+    },
+    {
+      "id": 1781355771802,
+      "type": "expense",
+      "amount": 160,
+      "date": "2026-06-09",
+      "category": "趣味",
+      "payment": "ゴールドNL",
+      "memo": "ブロスタ"
+    },
+    {
+      "id": 1781355802432,
+      "type": "expense",
+      "amount": 1125,
+      "date": "2026-06-10",
+      "category": "食費",
+      "payment": "ゴールドNL",
+      "memo": "セブン（返却あり）"
+    },
+    {
+      "id": 1781355816446,
+      "type": "income",
+      "amount": 121433,
+      "date": "2026-06-10",
+      "category": "賞与",
+      "payment": "現金",
+      "memo": ""
+    },
+    {
+      "id": 1781355829910,
+      "type": "income",
+      "amount": 2500,
+      "date": "2026-06-10",
+      "category": "その他",
+      "payment": "現金",
+      "memo": "ノジマのドコモ光"
+    },
+    {
+      "id": 1781355939601,
+      "type": "expense",
+      "amount": 800,
+      "date": "2026-06-12",
+      "category": "外食費",
+      "payment": "ゴールドNL",
+      "memo": "すき家"
+    },
+    {
+      "id": 1781355958390,
+      "type": "expense",
+      "amount": 690,
+      "date": "2026-06-12",
+      "category": "外食費",
+      "payment": "ゴールドNL",
+      "memo": "松のや"
+    },
+    {
+      "id": 1781356008111,
+      "type": "income",
+      "amount": 1125,
+      "date": "2026-06-12",
+      "category": "返却",
+      "payment": "現金",
+      "memo": "セブン"
+    },
+    {
+      "id": 1781356151123,
+      "type": "expense",
+      "amount": 346,
+      "date": "2026-06-13",
+      "category": "趣味",
+      "payment": "ゴールドNL",
+      "memo": "カラオケ"
+    },
+    {
+      "id": 1781363784677.9617,
+      "fixedExpenseId": 1781354588081,
+      "type": "expense",
+      "amount": 1500,
+      "date": "2026-06-10",
+      "category": "サブスク",
+      "payment": "ゴールドNL"
+    },
+    {
+      "id": 1781363784677.5012,
+      "fixedExpenseId": 1781354865120,
+      "type": "expense",
+      "amount": 440,
+      "date": "2026-06-05",
+      "category": "サブスク",
+      "payment": "ゴールドNL"
+    },
+    {
+      "id": 1781363784677.5354,
+      "fixedExpenseId": 1781355236020,
+      "type": "expense",
+      "amount": 1400,
+      "date": "2026-06-07",
+      "category": "サブスク",
+      "payment": "ゴールドNL"
+    },
+    {
+      "id": 1781363784677.043,
+      "fixedExpenseId": 1781356209443,
+      "type": "expense",
+      "amount": 20000,
+      "date": "2026-06-07",
+      "category": "サブスク",
+      "payment": "ゴールドNL"
+    },
+    {
+      "id": 1781393806464,
+      "type": "expense",
+      "amount": 1000,
+      "date": "2026-06-14",
+      "category": "交通費",
+      "payment": "ゴールドNL",
+      "memo": "PASMOチャージ"
+    },
+    {
+      "id": 1781401309667,
+      "type": "expense",
+      "amount": 988,
+      "date": "2026-06-14",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "ゴム"
+    },
+    {
+      "id": 1781425332177,
+      "type": "expense",
+      "amount": 4180,
+      "date": "2026-06-14",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "快活"
+    },
+    {
+      "id": 1781425387541,
+      "type": "expense",
+      "amount": 490,
+      "date": "2026-06-14",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "ワッフル"
+    },
+    {
+      "id": 1781426263453,
+      "type": "expense",
+      "amount": 3060,
+      "date": "2026-06-14",
+      "category": "デート",
+      "payment": "ゴールドNL",
+      "memo": "スープストック"
+    },
+    {
+      "id": 1781432909108,
+      "type": "expense",
+      "amount": 1000,
+      "date": "2026-06-14",
+      "category": "交通費",
+      "payment": "ゴールドNL",
+      "memo": "PASMOチャージ"
+    },
+    {
+      "id": 1781432917033,
+      "type": "income",
+      "amount": 2000,
+      "date": "2026-06-14",
+      "category": "返却",
+      "payment": "現金",
+      "memo": "ほなから"
+    },
+    {
+      "id": 1781473875071,
+      "type": "expense",
+      "amount": 128,
+      "date": "2026-06-11",
+      "category": "外食費",
+      "payment": "ゴールドNL",
+      "memo": "おかしのまちおか"
+    },
+    {
+      "id": 1781476773076,
+      "type": "expense",
+      "amount": 410,
+      "date": "2026-06-15",
+      "category": "食費",
+      "payment": "ゴールドNL",
+      "memo": "おにぎり二つ"
+    },
+    {
+      "id": 1781870115490,
+      "type": "expense",
+      "amount": 7049,
+      "date": "2026-06-14",
+      "category": "通信費",
+      "payment": "AmazonPrimeカード",
+      "memo": "ドコモ料金"
+    },
+    {
+      "id": 1781870146894,
+      "type": "expense",
+      "amount": 1020,
+      "date": "2026-06-19",
+      "category": "外食費",
+      "payment": "ゴールドNL",
+      "memo": "マック"
+    }
+  ],
+  "categories": [
+    {
+      "name": "食費",
+      "type": "expense"
+    },
+    {
+      "name": "外食費",
+      "type": "expense"
+    },
+    {
+      "name": "交通費",
+      "type": "expense"
+    },
+    {
+      "name": "衣服",
+      "type": "expense"
+    },
+    {
+      "name": "サブスク",
+      "type": "expense"
+    },
+    {
+      "name": "通信費",
+      "type": "expense"
+    },
+    {
+      "name": "交際費",
+      "type": "expense"
+    },
+    {
+      "name": "趣味",
+      "type": "expense"
+    },
+    {
+      "name": "病院",
+      "type": "expense"
+    },
+    {
+      "name": "遊び",
+      "type": "expense"
+    },
+    {
+      "name": "返却",
+      "type": "expense"
+    },
+    {
+      "name": "その他",
+      "type": "expense"
+    },
+    {
+      "name": "給料",
+      "type": "income"
+    },
+    {
+      "name": "賞与",
+      "type": "income"
+    },
+    {
+      "name": "返却",
+      "type": "income"
+    },
+    {
+      "name": "その他",
+      "type": "income"
+    },
+    {
+      "name": "デート",
+      "type": "expense"
+    },
+    {
+      "name": "日用品",
+      "type": "expense"
+    },
+    {
+      "name": "投資",
+      "type": "expense"
+    }
+  ],
+  "payments": [
+    {
+      "name": "現金",
+      "type": "cash"
+    },
+    {
+      "name": "PayPay",
+      "type": "emoney"
+    },
+    {
+      "name": "PayPayカード",
+      "type": "credit",
+      "paymentDay": 27
+    },
+    {
+      "name": "ゴールドNL",
+      "type": "credit",
+      "paymentDay": 26
+    },
+    {
+      "name": "AmazonPrimeカード",
+      "type": "credit",
+      "paymentDay": 26
+    },
+    {
+      "name": "Viewカード",
+      "type": "credit",
+      "paymentDay": 4
+    }
+  ],
+  "fixedExpenses": [
+    {
+      "id": 1781354588081,
+      "name": "iCloud",
+      "amount": 1500,
+      "day": 10,
+      "payment": "ゴールドNL"
+    },
+    {
+      "id": 1781354865120,
+      "name": "BROTHER（髭男）",
+      "amount": 440,
+      "day": 5,
+      "payment": "ゴールドNL"
+    },
+    {
+      "id": 1781355236020,
+      "name": "ChatGPT",
+      "amount": 1400,
+      "day": 7,
+      "payment": "ゴールドNL"
+    },
+    {
+      "id": 1781356209443,
+      "name": "NISA",
+      "amount": 20000,
+      "day": 7,
+      "payment": "ゴールドNL"
+    }
+  ],
+  "paidBills": [
+    {
+      "cardName": "Viewカード",
+      "targetMonth": "2026-04"
+    }
+  ],
+  "balance": 0
+}

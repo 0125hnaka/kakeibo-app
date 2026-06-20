@@ -127,10 +127,26 @@ function renderCardUsage() {
 
     list.innerHTML = "";
 
-    for (
-        const card
-        in usageByCard
-    ) {
+    Object.entries(
+        usageByCard
+    )
+    .sort(
+        function(a, b) {
+
+            return (
+                b[1] - a[1]
+            );
+
+        }
+    )
+    .forEach(
+        function(item) {
+
+        const card =
+            item[0];
+
+        const amount =
+            item[1];
 
         const div =
             document.createElement(
@@ -154,7 +170,7 @@ function renderCardUsage() {
 
         const ratio =
             (
-                usageByCard[card]
+                amount
                 /
                 total
                 *
@@ -172,7 +188,7 @@ function renderCardUsage() {
                 </div>
 
                 <div class="credit-card-amount">
-                    ${usageByCard[card].toLocaleString()}円
+                    ${amount.toLocaleString()}円
                 </div>
 
             </div>
@@ -196,17 +212,38 @@ function renderCardUsage() {
             div
         );
 
-    }
+        }
+    );
 
 }
 
 function renderCardBilling() {
 
+    function toYearMonthLocal(date) {
+
+        const year =
+            date.getFullYear();
+
+        const month =
+            String(
+                date.getMonth() + 1
+            ).padStart(2, "0");
+
+        return `${year}-${month}`;
+
+    }
+
     const payments =
         getPayments();
 
+    const paidBills =
+        getPaidBills();
+
     const expenses =
         getExpenses();
+
+    const today =
+        new Date();
 
     const billingMonthDate =
         new Date(
@@ -224,12 +261,15 @@ function renderCardBilling() {
     );
 
     const targetMonth =
-        targetDate
-            .toISOString()
-            .substring(
-                0,
-                7
-            );
+        toYearMonthLocal(
+            targetDate
+        );
+
+    const billingYear =
+        billingMonthDate.getFullYear();
+
+    const billingMonthIndex =
+        billingMonthDate.getMonth();
 
     const billingByCard =
         {};
@@ -314,15 +354,27 @@ function renderCardBilling() {
 
     list.innerHTML = "";
 
-    for (
-        const card
-        in billingByCard
-    ) {
+    Object.entries(
+        billingByCard
+    )
+    .sort(
+        function(a, b) {
+
+            return (
+                b[1].amount -
+                a[1].amount
+            );
+
+        }
+    )
+    .forEach(
+        function(entry) {
+
+        const card =
+            entry[0];
 
         const item =
-            billingByCard[
-                card
-            ];
+            entry[1];
 
         const ratio =
             (
@@ -340,6 +392,48 @@ function renderCardBilling() {
 
         div.className =
             "credit-card-item";
+
+        const billDate =
+            new Date(
+                billingYear,
+                billingMonthIndex,
+                item.paymentDay
+            );
+
+        const isPaid =
+            paidBills.some(
+                function(bill) {
+
+                    return (
+                        bill.cardName ===
+                        card &&
+                        bill.targetMonth ===
+                        targetMonth
+                    );
+
+                }
+            );
+
+        let statusText =
+            "未到来";
+
+        if (
+            isPaid
+        ) {
+
+            statusText =
+                "請求済み";
+
+        }
+
+        else if (
+            today >= billDate
+        ) {
+
+            statusText =
+                "未反映";
+
+        }
 
         div.innerHTML =
         `
@@ -363,6 +457,12 @@ function renderCardBilling() {
 
                  <br>
 
+                <span class="credit-bill-status">
+                    ${statusText}
+                </span>
+
+                <br>
+
                 <span class="credit-card-percent">
                     ${ratio}%
                 </span>
@@ -376,7 +476,8 @@ function renderCardBilling() {
             div
         );
 
-    }
+        }
+    );
 
 }
 

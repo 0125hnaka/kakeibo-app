@@ -51,7 +51,19 @@ function renderFixedAnalysis() {
 
     let total = 0;
 
-    fixedExpenses.forEach(
+    fixedExpenses
+    .slice()
+    .sort(
+        function(a, b) {
+
+            return (
+                b.amount -
+                a.amount
+            );
+
+        }
+    )
+    .forEach(
         function(item) {
 
             total +=
@@ -123,9 +135,11 @@ function renderFixedAnalysis() {
 
                 <div>
 
-                    ${percent.toFixed(
-                        1
-                    )}%
+                    <span class="credit-card-percent">
+                        ${percent.toFixed(
+                            1
+                        )}%
+                    </span>
 
                 </div>
                 `;

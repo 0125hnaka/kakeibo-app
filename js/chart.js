@@ -67,10 +67,6 @@ function renderCategoryChart() {
 
     }
 
-    console.log(
-        window.categoryChart
-    );
-
     if (!canvas) {
         return;
     }
@@ -87,7 +83,20 @@ function renderCategoryChart() {
 
                     datasets: [
                         {
-                            data: values
+                            data: values,
+
+                            backgroundColor: [
+                            "#4CAF50",
+                            "#2196F3",
+                            "#FF9800",
+                            "#9C27B0",
+                            "#F44336",
+                            "#00BCD4",
+                            "#795548",
+                            "#607D8B",
+                            "#8BC34A",
+                            "#FFC107"
+                            ]
                         }
                     ]
                 }
