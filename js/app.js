@@ -54,6 +54,13 @@ initializeFixedAnalysis();
 renderCategoryList();
 renderPaymentList();
 
+if (
+    typeof renderPayslipList ===
+    "function"
+) {
+    renderPayslipList();
+}
+
 setActiveBottomTab(
     "inputTab"
 );

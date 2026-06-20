@@ -199,6 +199,15 @@ function calculateBaseBalanceForTarget(
 
 function rebuildBalanceFromBase() {
 
+    if (
+        typeof syncAllPayslipsToExpensesForRebuild ===
+        "function"
+    ) {
+
+        syncAllPayslipsToExpensesForRebuild();
+
+    }
+
     const baseBalance =
         getOrCreateBaseBalance();
 

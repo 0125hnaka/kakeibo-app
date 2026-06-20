@@ -1047,6 +1047,260 @@
 
     </div>
 
+    <!-- 給与明細ページ -->
+    <div
+        id="payslipPage"
+        style="display:none;"
+    >
+
+        <h1>給与明細</h1>
+
+        <button
+            type="button"
+            id="addPayslipButton"
+            class="payslip-add-btn"
+        >
+            ＋ 明細を追加
+        </button>
+
+        <div id="payslipList">
+        </div>
+
+    </div>
+
+    <!-- 給与明細入力モーダル -->
+    <div
+        id="payslipInputModal"
+        class="modal"
+        style="display:none;"
+    >
+
+        <div class="modal-content payslip-modal-content">
+
+            <h2 id="payslipModalTitle">給与明細を入力</h2>
+
+            <label class="payslip-label">支給年月</label>
+            <input
+                type="month"
+                id="payslipPeriod"
+            >
+
+            <label class="payslip-label">支払日</label>
+            <input
+                type="date"
+                id="payslipPayDate"
+            >
+
+            <div class="payslip-section-title">支給</div>
+
+            <label class="payslip-label">額面</label>
+            <input
+                type="number"
+                id="payslipGrossPay"
+                placeholder="例: 300000"
+                min="0"
+                step="1"
+            >
+
+            <label class="payslip-label">ボーナス</label>
+            <input
+                type="number"
+                id="payslipBonusPay"
+                placeholder="例: 500000"
+                min="0"
+                step="1"
+            >
+
+            <div class="payslip-section-subtitle">追加支給項目</div>
+
+            <div id="payslipAdditionalEarningsList">
+            </div>
+
+            <button
+                type="button"
+                id="addPayslipEarningItemButton"
+                class="payslip-small-btn"
+            >
+                ＋ 支給項目を追加
+            </button>
+
+            <div class="payslip-section-title">控除</div>
+
+            <label class="payslip-label">所得税</label>
+            <input
+                type="number"
+                id="payslipIncomeTax"
+                placeholder="例: 8000"
+                min="0"
+                step="1"
+            >
+
+            <label class="payslip-label">住民税</label>
+            <input
+                type="number"
+                id="payslipResidentTax"
+                placeholder="例: 15000"
+                min="0"
+                step="1"
+            >
+
+            <label class="payslip-label">健康保険料</label>
+            <input
+                type="number"
+                id="payslipHealthInsurance"
+                placeholder="例: 16000"
+                min="0"
+                step="1"
+            >
+
+            <label class="payslip-label">厚生年金</label>
+            <input
+                type="number"
+                id="payslipPension"
+                placeholder="例: 27000"
+                min="0"
+                step="1"
+            >
+
+            <label class="payslip-label">雇用保険</label>
+            <input
+                type="number"
+                id="payslipEmploymentInsurance"
+                placeholder="例: 900"
+                min="0"
+                step="1"
+            >
+
+            <label class="payslip-label">その他控除</label>
+            <input
+                type="number"
+                id="payslipOtherDeductions"
+                placeholder="例: 0"
+                min="0"
+                step="1"
+            >
+
+            <div class="payslip-section-title">天引き</div>
+
+            <label class="payslip-label">持ち株</label>
+            <input
+                type="number"
+                id="payslipStockDeduction"
+                placeholder="例: 5000"
+                min="0"
+                step="1"
+            >
+
+            <label class="payslip-label">保険</label>
+            <input
+                type="number"
+                id="payslipInsuranceDeduction"
+                placeholder="例: 3000"
+                min="0"
+                step="1"
+            >
+
+            <label class="payslip-label">その他天引き</label>
+            <input
+                type="number"
+                id="payslipOtherWithholding"
+                placeholder="例: 0"
+                min="0"
+                step="1"
+            >
+
+            <div class="payslip-section-title">手取り</div>
+
+            <label class="payslip-label">手取り金額</label>
+            <input
+                type="number"
+                id="payslipNetPay"
+                placeholder="例: 233100"
+                min="0"
+                step="1"
+            >
+
+            <button
+                type="button"
+                id="payslipAutoCalcButton"
+                class="payslip-calc-btn"
+            >
+                支給合計と控除・天引きから手取りを自動計算
+            </button>
+
+            <label class="payslip-label">メモ</label>
+            <input
+                type="text"
+                id="payslipMemo"
+                placeholder="メモ（任意）"
+            >
+
+            <div class="payslip-modal-buttons">
+
+                <button
+                    type="button"
+                    id="savePayslipButton"
+                >
+                    保存
+                </button>
+
+                <button
+                    type="button"
+                    id="cancelPayslipButton"
+                >
+                    キャンセル
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- 給与明細詳細モーダル -->
+    <div
+        id="payslipDetailModal"
+        class="modal"
+        style="display:none;"
+    >
+
+        <div class="modal-content payslip-modal-content">
+
+            <h2 id="payslipDetailTitle"></h2>
+
+            <div id="payslipDetailBody">
+            </div>
+
+            <div class="payslip-modal-buttons">
+
+                <button
+                    type="button"
+                    id="editPayslipButton"
+                >
+                    編集
+                </button>
+
+                <button
+                    type="button"
+                    id="deletePayslipButton"
+                    class="payslip-delete-btn"
+                >
+                    削除
+                </button>
+
+                <button
+                    type="button"
+                    id="closePayslipDetailButton"
+                >
+                    閉じる
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
     <nav id="bottomNav">
 
         <button
@@ -1068,6 +1322,13 @@
             id="analysisTab"
         >
             分析
+        </button>
+
+        <button
+            type="button"
+            id="payslipTab"
+        >
+            給与
         </button>
 
         <button
@@ -1100,6 +1361,7 @@
     <script src="js/fixed-analysis.js"></script>
     <script src="js/asset-analysis.js"></script>
     <script src="js/fixed-expense-generator.js"></script>
+    <script src="js/payslip.js"></script>
     <script src="js/app.js"></script>
     <script src="js/analysis-navigation.js"></script>
     <script src="js/backup.js"></script>

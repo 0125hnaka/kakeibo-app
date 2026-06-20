@@ -10,7 +10,8 @@ const appStorageKeys = [
     "fixedExpenses",
     "paidBills",
     "baseBalance",
-    "balance"
+    "balance",
+    "payslips"
 ];
 
 resetButton.addEventListener(

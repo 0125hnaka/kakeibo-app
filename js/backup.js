@@ -11,7 +11,7 @@ function exportBackup() {
 
     const backupData = {
 
-        schemaVersion: 2,
+        schemaVersion: 3,
 
         exportedAt:
             new Date()
@@ -64,7 +64,14 @@ function exportBackup() {
                 localStorage.getItem(
                     "balance"
                 )
-            ) || 0
+            ) || 0,
+
+        payslips:
+            JSON.parse(
+                localStorage.getItem(
+                    "payslips"
+                )
+            ) || []
 
     };
 
@@ -208,6 +215,14 @@ function importBackup(
             return false;
         }
 
+        // 古いバックアップは payslips を含まないため optional として扱う
+        if (
+            data.payslips !== undefined &&
+            !isArray(data.payslips)
+        ) {
+            return false;
+        }
+
         return true;
 
     }
@@ -309,6 +324,17 @@ function importBackup(
                 "balance",
                 String(
                     normalizedBalance
+                )
+            );
+
+            localStorage.setItem(
+                "payslips",
+                JSON.stringify(
+                    Array.isArray(
+                        data.payslips
+                    )
+                    ? data.payslips
+                    : []
                 )
             );
 

@@ -395,6 +395,34 @@ function saveFixedExpenses(
 
 }
 
+function getPayslips() {
+
+    const data =
+        localStorage.getItem(
+            "payslips"
+        );
+
+    if (data === null) {
+        return [];
+    }
+
+    return JSON.parse(data);
+
+}
+
+function savePayslips(
+    payslips
+) {
+
+    localStorage.setItem(
+        "payslips",
+        JSON.stringify(
+            payslips
+        )
+    );
+
+}
+
 const backupData = {
 
     expenses:

@@ -2,25 +2,22 @@ function showPage(
     pageId
 ) {
 
-    document.getElementById(
-        "inputPage"
-    ).style.display =
-        "none";
-
-    document.getElementById(
-        "historyPage"
-    ).style.display =
-        "none";
-
-    document.getElementById(
-        "analysisPage"
-    ).style.display =
-        "none";
-
-    document.getElementById(
+    [
+        "inputPage",
+        "historyPage",
+        "analysisPage",
+        "payslipPage",
         "settingsPage"
-    ).style.display =
-        "none";
+    ].forEach(
+        function(id) {
+
+            document.getElementById(
+                id
+            ).style.display =
+                "none";
+
+        }
+    );
 
     document.getElementById(
         pageId
@@ -96,6 +93,30 @@ document.getElementById(
         );
 
         renderSummaryCards();
+
+    }
+);
+
+document.getElementById(
+    "payslipTab"
+).addEventListener(
+    "click",
+    function() {
+
+        showPage(
+            "payslipPage"
+        );
+
+        setActiveBottomTab(
+            "payslipTab"
+        );
+
+        if (
+            typeof renderPayslipList ===
+            "function"
+        ) {
+            renderPayslipList();
+        }
 
     }
 );

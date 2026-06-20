@@ -139,9 +139,9 @@ button {
 
     background: transparent;
 
-    font-size: 16px;
+    font-size: 13px;
 
-    width: 70px;
+    width: 58px;
 
     height: 45px;
 
@@ -1406,6 +1406,346 @@ label {
 
 }
 
+/* ==========================
+   給与明細
+========================== */
+
+.payslip-add-btn {
+
+    width: 100%;
+
+    background: #4CAF50;
+
+    color: white;
+
+    font-size: 18px;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+
+}
+
+.payslip-card {
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 16px 20px;
+
+    margin-bottom: 12px;
+
+    box-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.08);
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+.payslip-card:active {
+
+    opacity: 0.75;
+
+}
+
+.payslip-card-period {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    color: #333;
+
+}
+
+.payslip-card-sub {
+
+    font-size: 13px;
+
+    color: #888;
+
+    margin-top: 4px;
+
+}
+
+.payslip-card-net {
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: #4CAF50;
+
+    text-align: right;
+
+}
+
+.payslip-card-net-label {
+
+    font-size: 11px;
+
+    color: #999;
+
+    text-align: right;
+
+}
+
+.payslip-modal-content {
+
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+}
+
+.payslip-label {
+
+    display: block;
+
+    font-size: 13px;
+
+    color: #888;
+
+    margin-top: 12px;
+
+    margin-bottom: 4px;
+
+}
+
+.payslip-section-title {
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    color: #4CAF50;
+
+    border-bottom: 2px solid #e8f5e9;
+
+    padding-bottom: 4px;
+
+    margin-top: 16px;
+
+    margin-bottom: 8px;
+
+}
+
+.payslip-section-subtitle {
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #888;
+
+    margin-top: 10px;
+
+    margin-bottom: 8px;
+
+}
+
+.payslip-additional-row {
+
+    display: grid;
+
+    grid-template-columns: 1fr 120px 44px;
+
+    gap: 8px;
+
+    margin-bottom: 8px;
+
+    align-items: center;
+
+}
+
+.payslip-additional-row input {
+
+    margin: 0;
+
+}
+
+.payslip-remove-item-btn {
+
+    background: #ffebee;
+
+    color: #e53935;
+
+    border: 1px solid #ffcdd2;
+
+    padding: 8px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+}
+
+.payslip-small-btn {
+
+    width: 100%;
+
+    background: white;
+
+    color: #4CAF50;
+
+    border: 1px solid #b8dfb7;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    margin-top: 2px;
+
+}
+
+.payslip-calc-btn {
+
+    width: 100%;
+
+    background: #e8f5e9;
+
+    color: #4CAF50;
+
+    font-size: 14px;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    margin-top: 8px;
+
+    margin-bottom: 4px;
+
+    border: 1px solid #c8e6c9;
+
+}
+
+.payslip-modal-buttons {
+
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 16px;
+
+}
+
+.payslip-modal-buttons button {
+
+    flex: 1;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+}
+
+#savePayslipButton {
+
+    background: #4CAF50;
+
+    color: white;
+
+}
+
+#cancelPayslipButton {
+
+    background: #ddd;
+
+}
+
+#editPayslipButton {
+
+    background: #4dabf7;
+
+    color: white;
+
+}
+
+#closePayslipDetailButton {
+
+    background: #ddd;
+
+}
+
+.payslip-delete-btn {
+
+    background: #ff6b6b !important;
+
+    color: white !important;
+
+}
+
+.payslip-detail-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 8px 0;
+
+    border-bottom: 1px solid #f0f0f0;
+
+    font-size: 15px;
+
+}
+
+.payslip-detail-row:last-child {
+
+    border-bottom: none;
+
+}
+
+.payslip-detail-label {
+
+    color: #888;
+
+}
+
+.payslip-detail-value {
+
+    font-weight: bold;
+
+    color: #333;
+
+}
+
+.payslip-detail-net {
+
+    color: #4CAF50;
+
+    font-size: 18px;
+
+}
+
+.payslip-empty {
+
+    text-align: center;
+
+    color: #bbb;
+
+    padding: 40px 0;
+
+    font-size: 16px;
+
+}
+
 /* =========================
    iPhone対応
 ========================= */
@@ -1470,18 +1810,18 @@ label {
         flex-direction: column;
     }
 
-    /* 下部ナビ */
+    /* 下部ナビ（5タブ対応） */
     #bottomNav {
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        height: 60px;
+        left: 6px;
+        right: 6px;
+        bottom: 8px;
+        height: 58px;
     }
 
     #bottomNav button {
-        width: 60px;
-        height: 40px;
-        font-size: 15px;
+        width: 54px;
+        height: 38px;
+        font-size: 12px;
     }
 
     .category-type-group label,
