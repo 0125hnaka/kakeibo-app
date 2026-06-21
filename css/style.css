@@ -72,6 +72,8 @@ select {
 
     padding: 12px;
 
+    font-size: 16px;
+
     border-radius: 10px;
 
     border: 1px solid #ddd;
@@ -134,7 +136,6 @@ button {
         );
 
 }
-
 #bottomNav button {
 
     background: transparent;
@@ -798,12 +799,9 @@ label {
     background: white;
 
     border-radius: 20px;
-
-    padding: 24px;
-
-    width: 90%;
-
-    max-width: 400px;
+    padding: 20px;
+    width: min(84vw, 340px);
+    max-width: 340px;
 
     box-shadow:
         0 4px 12px
@@ -1490,6 +1488,52 @@ label {
 
 }
 
+.payslip-card-badges {
+
+    display: flex;
+
+    gap: 6px;
+
+    flex-wrap: wrap;
+
+    margin-top: 6px;
+
+}
+
+.payslip-card-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 3px 8px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    line-height: 1;
+
+}
+
+.payslip-card-badge-salary {
+
+    background: #e8f5e9;
+
+    color: #2e7d32;
+
+}
+
+.payslip-card-badge-bonus {
+
+    background: #fff8e1;
+
+    color: #8d6e00;
+
+}
+
 .payslip-card-net-label {
 
     font-size: 11px;
@@ -1502,7 +1546,7 @@ label {
 
 .payslip-modal-content {
 
-    max-height: 85vh;
+    max-height: 82vh;
 
     overflow-y: auto;
 

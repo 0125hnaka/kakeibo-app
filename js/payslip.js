@@ -115,6 +115,136 @@ function addAdditionalEarningRow(
 
 }
 
+function createOtherWithholdingRow(
+    name,
+    amount
+) {
+
+    const row =
+        document.createElement(
+            "div"
+        );
+
+    row.className =
+        "payslip-additional-row payslip-withholding-row";
+
+    row.innerHTML =
+        `
+        <input
+            type="text"
+            class="payslip-withholding-name"
+            placeholder="例: 互助会"
+            value="${payslipEscapeHtml(name || "")}">
+
+        <input
+            type="number"
+            class="payslip-withholding-amount"
+            placeholder="金額"
+            min="0"
+            step="1"
+            value="${toNumberOrZero(amount) || ""}">
+
+        <button
+            type="button"
+            class="payslip-remove-item-btn">削除</button>
+        `;
+
+    row.querySelector(
+        ".payslip-remove-item-btn"
+    ).addEventListener(
+        "click",
+        function() {
+
+            row.remove();
+
+        }
+    );
+
+    return row;
+
+}
+
+function addOtherWithholdingRow(
+    name,
+    amount
+) {
+
+    const list =
+        document.getElementById(
+            "payslipOtherWithholdingList"
+        );
+
+    if (!list) {
+        return;
+    }
+
+    list.appendChild(
+        createOtherWithholdingRow(
+            name,
+            amount
+        )
+    );
+
+}
+
+function clearOtherWithholdingRows() {
+
+    const list =
+        document.getElementById(
+            "payslipOtherWithholdingList"
+        );
+
+    if (!list) {
+        return;
+    }
+
+    list.innerHTML = "";
+
+}
+
+function getOtherWithholdingItemsFromForm() {
+
+    const rows =
+        document.querySelectorAll(
+            "#payslipOtherWithholdingList .payslip-additional-row"
+        );
+
+    const items = [];
+
+    rows.forEach(
+        function(row) {
+
+            const name =
+                row.querySelector(
+                    ".payslip-withholding-name"
+                ).value.trim();
+
+            const amount =
+                toNumberOrZero(
+                    row.querySelector(
+                        ".payslip-withholding-amount"
+                    ).value
+                );
+
+            if (
+                name !== "" ||
+                amount > 0
+            ) {
+
+                items.push({
+                    name: name,
+                    amount: amount
+                });
+
+            }
+
+        }
+    );
+
+    return items;
+
+}
+
 function clearAdditionalEarningRows() {
 
     const list =
@@ -210,6 +340,7 @@ function getPayslipFormTotals() {
         "payslipResidentTax",
         "payslipHealthInsurance",
         "payslipPension",
+        "payslipChildSupportContribution",
         "payslipEmploymentInsurance",
         "payslipOtherDeductions"
     ].reduce(
@@ -228,8 +359,7 @@ function getPayslipFormTotals() {
 
     const withholdingTotal = [
         "payslipStockDeduction",
-        "payslipInsuranceDeduction",
-        "payslipOtherWithholding"
+        "payslipInsuranceDeduction"
     ].reduce(
         function(sum, id) {
 
@@ -244,6 +374,22 @@ function getPayslipFormTotals() {
         0
     );
 
+    const otherWithholdingItems =
+        getOtherWithholdingItemsFromForm();
+
+    const otherWithholdingTotal =
+        otherWithholdingItems.reduce(
+            function(sum, item) {
+
+                return sum +
+                    toNumberOrZero(
+                        item.amount
+                    );
+
+            },
+            0
+        );
+
     return {
         grossPay,
         bonusPay,
@@ -254,8 +400,47 @@ function getPayslipFormTotals() {
             bonusPay +
             additionalEarningsTotal,
         deductionsTotal,
-        withholdingTotal
+        withholdingTotal:
+            withholdingTotal +
+            otherWithholdingTotal,
+        otherWithholdingItems,
+        otherWithholdingTotal
     };
+
+}
+
+function getOtherWithholdingItemsForDisplay(
+    payslip
+) {
+
+    if (
+        Array.isArray(
+            payslip.otherWithholdingItems
+        ) &&
+        payslip.otherWithholdingItems.length > 0
+    ) {
+
+        return payslip.otherWithholdingItems;
+
+    }
+
+    const legacyAmount =
+        toNumberOrZero(
+            payslip.otherWithholding
+        );
+
+    if (legacyAmount > 0) {
+
+        return [
+            {
+                name: "その他天引き",
+                amount: legacyAmount
+            }
+        ];
+
+    }
+
+    return [];
 
 }
 
@@ -656,11 +841,32 @@ function renderPayslipList() {
                     payslip.payDate || ""
                 );
 
+            const badges = [];
+
+            if (
+                toNumberOrZero(payslip.grossPay) > 0
+            ) {
+                badges.push(
+                    `<span class="payslip-card-badge payslip-card-badge-salary">給与</span>`
+                );
+            }
+
+            if (
+                toNumberOrZero(payslip.bonusPay) > 0
+            ) {
+                badges.push(
+                    `<span class="payslip-card-badge payslip-card-badge-bonus">賞与</span>`
+                );
+            }
+
             card.innerHTML =
                 `
                 <div>
                     <div class="payslip-card-period">
                         ${period}
+                    </div>
+                    <div class="payslip-card-badges">
+                        ${badges.join("") || "<span class=\"payslip-card-badge payslip-card-badge-salary\">給与</span>"}
                     </div>
                     <div class="payslip-card-sub">
                         支払日: ${payDate}
@@ -794,6 +1000,11 @@ function openPayslipInput(
             payslip.pension || "";
 
         document.getElementById(
+            "payslipChildSupportContribution"
+        ).value =
+            payslip.childSupportContribution || "";
+
+        document.getElementById(
             "payslipEmploymentInsurance"
         ).value =
             payslip.employmentInsurance || "";
@@ -813,10 +1024,36 @@ function openPayslipInput(
         ).value =
             payslip.insuranceDeduction || "";
 
-        document.getElementById(
-            "payslipOtherWithholding"
-        ).value =
-            payslip.otherWithholding || "";
+        clearOtherWithholdingRows();
+
+        const otherWithholdingItems =
+            getOtherWithholdingItemsForDisplay(
+                payslip
+            );
+
+        if (otherWithholdingItems.length > 0) {
+
+            otherWithholdingItems.forEach(
+                function(item) {
+
+                    addOtherWithholdingRow(
+                        item.name || "",
+                        item.amount || 0
+                    );
+
+                }
+            );
+
+        }
+
+        else {
+
+            addOtherWithholdingRow(
+                "",
+                0
+            );
+
+        }
 
         document.getElementById(
             "payslipNetPay"
@@ -847,11 +1084,11 @@ function openPayslipInput(
             "payslipResidentTax",
             "payslipHealthInsurance",
             "payslipPension",
+            "payslipChildSupportContribution",
             "payslipEmploymentInsurance",
             "payslipOtherDeductions",
             "payslipStockDeduction",
             "payslipInsuranceDeduction",
-            "payslipOtherWithholding",
             "payslipNetPay",
             "payslipMemo"
         ].forEach(
@@ -865,6 +1102,13 @@ function openPayslipInput(
         );
 
         clearAdditionalEarningRows();
+
+        clearOtherWithholdingRows();
+
+        addOtherWithholdingRow(
+            "",
+            0
+        );
 
     }
 
@@ -895,6 +1139,20 @@ document.getElementById(
     function() {
 
         addAdditionalEarningRow(
+            "",
+            0
+        );
+
+    }
+);
+
+document.getElementById(
+    "addPayslipOtherWithholdingItemButton"
+).addEventListener(
+    "click",
+    function() {
+
+        addOtherWithholdingRow(
             "",
             0
         );
@@ -1067,6 +1325,13 @@ document.getElementById(
                     ).value
                 ) || 0,
 
+            childSupportContribution:
+                Number(
+                    document.getElementById(
+                        "payslipChildSupportContribution"
+                    ).value
+                ) || 0,
+
             employmentInsurance:
                 Number(
                     document.getElementById(
@@ -1096,11 +1361,10 @@ document.getElementById(
                 ) || 0,
 
             otherWithholding:
-                Number(
-                    document.getElementById(
-                        "payslipOtherWithholding"
-                    ).value
-                ) || 0,
+                totals.otherWithholdingTotal,
+
+            otherWithholdingItems:
+                totals.otherWithholdingItems,
 
             netPay:
                 netPay,
@@ -1211,8 +1475,14 @@ function openPayslipDetail(id) {
         (payslip.residentTax || 0) +
         (payslip.healthInsurance || 0) +
         (payslip.pension || 0) +
+        (payslip.childSupportContribution || 0) +
         (payslip.employmentInsurance || 0) +
         (payslip.otherDeductions || 0);
+
+    const otherWithholdingItems =
+        getOtherWithholdingItemsForDisplay(
+            payslip
+        );
 
     const totalWithholding =
         toNumberOrZero(
@@ -1221,8 +1491,16 @@ function openPayslipDetail(id) {
         toNumberOrZero(
             payslip.insuranceDeduction
         ) +
-        toNumberOrZero(
-            payslip.otherWithholding
+        otherWithholdingItems.reduce(
+            function(sum, item) {
+
+                return sum +
+                    toNumberOrZero(
+                        item.amount
+                    );
+
+            },
+            0
         );
 
     function row(label, value, isNet) {
@@ -1267,13 +1545,25 @@ function openPayslipDetail(id) {
         row("住民税", formatYen(payslip.residentTax)) +
         row("健康保険料", formatYen(payslip.healthInsurance)) +
         row("厚生年金", formatYen(payslip.pension)) +
+        row("子供子育て支援金", formatYen(payslip.childSupportContribution)) +
         row("雇用保険", formatYen(payslip.employmentInsurance)) +
         row("その他控除", formatYen(payslip.otherDeductions)) +
         row("控除合計", formatYen(totalDeductions)) +
         `<div class="payslip-section-title">天引き</div>` +
         row("持ち株", formatYen(payslip.stockDeduction || 0)) +
         row("保険", formatYen(payslip.insuranceDeduction || 0)) +
-        row("その他天引き", formatYen(payslip.otherWithholding || 0)) +
+        otherWithholdingItems
+            .map(
+                function(item) {
+
+                    return row(
+                        item.name || "その他天引き",
+                        formatYen(item.amount || 0)
+                    );
+
+                }
+            )
+            .join("") +
         row("天引き合計", formatYen(totalWithholding)) +
         `<div class="payslip-section-title">手取り</div>` +
         row("手取り", formatYen(payslip.netPay), true);

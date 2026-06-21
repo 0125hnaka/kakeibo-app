@@ -1162,6 +1162,15 @@
                 step="1"
             >
 
+            <label class="payslip-label">子供子育て支援金</label>
+            <input
+                type="number"
+                id="payslipChildSupportContribution"
+                placeholder="例: 1000"
+                min="0"
+                step="1"
+            >
+
             <label class="payslip-label">雇用保険</label>
             <input
                 type="number"
@@ -1200,14 +1209,18 @@
                 step="1"
             >
 
-            <label class="payslip-label">その他天引き</label>
-            <input
-                type="number"
-                id="payslipOtherWithholding"
-                placeholder="例: 0"
-                min="0"
-                step="1"
+            <div class="payslip-section-subtitle">その他天引き</div>
+
+            <div id="payslipOtherWithholdingList">
+            </div>
+
+            <button
+                type="button"
+                id="addPayslipOtherWithholdingItemButton"
+                class="payslip-small-btn"
             >
+                ＋ その他天引きを追加
+            </button>
 
             <div class="payslip-section-title">手取り</div>
 
